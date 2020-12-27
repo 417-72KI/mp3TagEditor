@@ -1,0 +1,96 @@
+name: mp3TagEditor
+
+options:
+  bundleIdPrefix: jp.room417
+  deploymentTarget:
+    macOS: 10.15
+  developmentLanguage: ja
+  xcodeVersion: "12.3"
+
+settings:
+  base:
+    DEVELOPMENT_TEAM: QQ9QE2K9VN
+    PROJECT_VERSION: 1
+    SEMANTIC_VERSION: 1.3.0
+  configs:
+    debug:
+      DEBUG_INFORMATION_FORMAT: "dwarf-with-dsym"
+
+targets:
+  mp3TagEditor:
+    type: application
+    platform: macOS
+    sources:
+      - mp3TagEditor
+    settings:
+      base:
+        OTHER_LDFLAGS: $(inherited) $(OTHER_LDFLAGS) -ObjC
+        DEVELOPMENT_LANGUAGE: jp
+    info:
+      path: mp3TagEditor/Resources/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: $(DEVELOPMENT_LANGUAGE)
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIconFile: ''
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: 6.0
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundlePackageType: $(PRODUCT_BUNDLE_PACKAGE_TYPE)
+        CFBundleVersion: $(PROJECT_VERSION)
+        CFBundleShortVersionString: $(SEMANTIC_VERSION)
+        LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
+        NSMainStoryboardFile: Main
+        NSPrincipalClass: NSApplication
+    entitlements:
+      path: mp3TagEditor/Resources/mp3TagEditor.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.files.user-selected.read-only: true
+    configs:
+      Debug:
+        OTHER_SWIFT_FLAGS: $(inherited) -Xfrontend -warn-long-expression-type-checking=500 -Xfrontend -warn-long-function-bodies=500
+    dependencies: []
+
+  mp3TagEditorTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - mp3TagEditorTests
+    settings:
+      base:
+        INFOPLIST_FILE: mp3TagEditorTests/Info.plist
+    info:
+      path: mp3TagEditorTests/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: $(DEVELOPMENT_LANGUAGE)
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: 6.0
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundlePackageType: $(PRODUCT_BUNDLE_PACKAGE_TYPE)
+        CFBundleVersion: $(PROJECT_VERSION)
+        CFBundleShortVersionString: $(SEMANTIC_VERSION)
+    dependencies:
+      - target: mp3TagEditor
+
+  mp3TagEditorUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    sources:
+      - mp3TagEditorUITests
+    settings:
+      base:
+        INFOPLIST_FILE: mp3TagEditorUITests/Info.plist
+    info:
+      path: mp3TagEditorUITests/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: $(DEVELOPMENT_LANGUAGE)
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleInfoDictionaryVersion: 6.0
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundlePackageType: $(PRODUCT_BUNDLE_PACKAGE_TYPE)
+        CFBundleVersion: $(PROJECT_VERSION)
+        CFBundleShortVersionString: $(SEMANTIC_VERSION)
+    dependencies:
+      - target: mp3TagEditor
