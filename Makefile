@@ -7,10 +7,10 @@ run: build
 
 setup:
 	mint bootstrap
+	$(MAKE) xcproj
+
+xcproj:
 	mint run xcodegen xcodegen generate --use-cache --quiet
 
-xcproj-quiet:
-	mint run xcodegen xcodegen generate --use-cache --quiet
-
-build: xcproj-quiet
+build: xcproj
 	xcrun xcodebuild -configuration Debug build | xcpretty
