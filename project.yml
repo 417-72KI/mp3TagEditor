@@ -31,6 +31,7 @@ targets:
       base:
         OTHER_LDFLAGS: $(inherited) $(OTHER_LDFLAGS) -ObjC
         DEVELOPMENT_LANGUAGE: jp
+        DEVELOPMENT_ASSET_PATHS: "\"$(TARGET_NAME)/Resources/Preview Content\""
     info:
       path: mp3TagEditor/Resources/Info.plist
       properties:
