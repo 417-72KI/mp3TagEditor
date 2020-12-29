@@ -14,23 +14,26 @@ struct Mp3FileTableView: NSViewRepresentable {
     @Binding var contents: [Mp3File]
 
     func makeNSView(context: Context) -> NSScrollView {
-       NSScrollView()
+        NSScrollView().apply {
+            $0.documentView = NSTableView().apply {
+                Column.allCases
+                    .map { column in
+                        NSTableColumn(identifier: NSUserInterfaceItemIdentifier(column.rawValue)).apply {
+                            $0.headerCell.title = column.title
+                        }
+                    }
+                    .forEach($0.addTableColumn(_:))
+                $0.allowsMultipleSelection = true
+                $0.dataSource = context.coordinator
+                $0.delegate = context.coordinator
+            }
+        }
     }
 
     func updateNSView(_ nsView: NSScrollView, context: Context) {
+        guard let tableView = nsView.documentView as? NSTableView else { return }
         context.coordinator.contents = contents
-        nsView.documentView = NSTableView().apply {
-            Column.allCases
-                .map { column in
-                    NSTableColumn(identifier: NSUserInterfaceItemIdentifier(column.rawValue)).apply {
-                        $0.headerCell.title = column.title
-                    }
-                }
-                .forEach($0.addTableColumn(_:))
-            $0.dataSource = context.coordinator
-            $0.delegate = context.coordinator
-            $0.reloadData()
-        }
+        tableView.reloadData()
     }
 
     func makeCoordinator() -> Coordinator {
