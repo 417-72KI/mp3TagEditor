@@ -13,6 +13,7 @@ struct Mp3FileTableView: NSViewRepresentable {
 
     @Binding var contents: [Mp3File]
     @Binding var selectedContents: [Mp3File]
+    @State private var sortingKey: (PartialKeyPath<Mp3File>, Bool)?
 
     func makeNSView(context: Context) -> NSScrollView {
         NSScrollView().apply {
@@ -22,6 +23,10 @@ struct Mp3FileTableView: NSViewRepresentable {
                         NSTableColumn(identifier: NSUserInterfaceItemIdentifier(column.rawValue))
                             .apply {
                                 $0.headerCell.title = column.title
+                                $0.sortDescriptorPrototype = NSSortDescriptor(
+                                    key: column.rawValue,
+                                    ascending: true
+                                )
                             }
                     }
                     .forEach($0.addTableColumn(_:))
@@ -35,6 +40,7 @@ struct Mp3FileTableView: NSViewRepresentable {
     func updateNSView(_ nsView: NSScrollView, context: Context) {
         guard let tableView = nsView.documentView as? NSTableView else { return }
         context.coordinator.contents = contents
+        context.coordinator.sortingKey = sortingKey
         tableView.reloadData()
     }
 
@@ -69,6 +75,7 @@ extension Mp3FileTableView {
     final class Coordinator: NSObject {
         var parent: Mp3FileTableView
         var contents: [Mp3File] = []
+        var sortingKey: (PartialKeyPath<Mp3File>, Bool)?
 
         init(_ parent: Mp3FileTableView) {
             self.parent = parent
@@ -76,14 +83,28 @@ extension Mp3FileTableView {
     }
 }
 
+private extension Mp3FileTableView.Coordinator {
+    var sortedContents: [Mp3File] {
+        guard let sortingKey = sortingKey else { return contents }
+        switch sortingKey.0 {
+        case let stringKeyPath as KeyPath<Mp3File, String?>:
+            return contents.sorted(by: stringKeyPath, ascending: sortingKey.1)
+        case let intKeyPath as KeyPath<Mp3File, Int?>:
+            return contents.sorted(by: intKeyPath, ascending: sortingKey.1)
+        default:
+            return contents
+        }
+    }
+}
+
 extension Mp3FileTableView.Coordinator: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
-        contents.count
+        sortedContents.count
     }
 
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         guard let tableColumn = tableColumn else { return nil }
-        let content = contents[row]
+        let content = sortedContents[row]
         switch Mp3FileTableView.Column(rawValue: tableColumn.identifier.rawValue) {
         case .title:
             return content.title
@@ -107,7 +128,14 @@ extension Mp3FileTableView.Coordinator: NSTableViewDelegate {
 
     func tableViewSelectionDidChange(_ notification: Notification) {
         guard let tableView = notification.object as? NSTableView else { return }
-        parent.selectedContents = tableView.selectedRowIndexes.map { contents[$0] }
+        parent.selectedContents = tableView.selectedRowIndexes.map { sortedContents[$0] }
+    }
+
+    func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
+        guard let sortDescriptor = tableView.sortDescriptors.first,
+              let column = sortDescriptor.key
+                .flatMap(Mp3FileTableView.Column.init) else { return }
+        parent.sortingKey = (column.keyPath, sortDescriptor.ascending)
     }
 }
 
