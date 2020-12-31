@@ -49,11 +49,13 @@ struct Mp3FileTableView: NSViewRepresentable {
     }
 }
 
+// MARK: - Column
 extension Mp3FileTableView {
     enum Column: String, CaseIterable {
         case title
         case artist
         case album
+        case albumArtist
         case filePath
     }
 }
@@ -66,11 +68,13 @@ extension Mp3FileTableView.Column {
         case .title: return \.title
         case .artist: return \.artist
         case .album: return \.album
+        case .albumArtist: return \.albumArtist
         case .filePath: return \.filePath
         }
     }
 }
 
+// MARK: - Coordinator
 extension Mp3FileTableView {
     final class Coordinator: NSObject {
         var parent: Mp3FileTableView
@@ -97,6 +101,7 @@ private extension Mp3FileTableView.Coordinator {
     }
 }
 
+// MARK: - NSTableViewDataSource
 extension Mp3FileTableView.Coordinator: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         sortedContents.count
@@ -121,6 +126,7 @@ extension Mp3FileTableView.Coordinator: NSTableViewDataSource {
     }
 }
 
+// MARK: - NSTableViewDelegate
 extension Mp3FileTableView.Coordinator: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
         true
@@ -139,6 +145,7 @@ extension Mp3FileTableView.Coordinator: NSTableViewDelegate {
     }
 }
 
+// MARK: - Preview
 struct Mp3FileTableView_Previews: PreviewProvider {
     static var previews: some View {
         Mp3FileTableView(contents: .constant([]),

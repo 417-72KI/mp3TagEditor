@@ -12,19 +12,21 @@ struct Mp3TagView: View {
     @ObservedObject private var viewState: ViewState = .init()
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Title")
-            TextField("", text: $viewState.title)
-            Text("Artist")
-            TextField("", text: $viewState.artist)
-            Text("Album")
-            TextField("", text: $viewState.album)
+        VStack(spacing: 8) {
+            VStack(alignment: .leading) {
+                Text("Title")
+                TextField("", text: $viewState.title)
+                Text("Artist")
+                TextField("", text: $viewState.artist)
+                Text("Album")
+                TextField("", text: $viewState.album)
+            }
             HStack {
-                VStack {
+                VStack(alignment: .leading) {
                     Text("Year")
                     TextField("", text: $viewState.year)
                 }
-                VStack {
+                VStack(alignment: .leading) {
                     Text("Track")
                     HStack {
                         TextField("", text: $viewState.trackPart)
@@ -32,9 +34,22 @@ struct Mp3TagView: View {
                         TextField("", text: $viewState.trackTotal)
                     }
                 }
-                VStack {
+                VStack(alignment: .leading) {
                     Text("Genre")
                     TextField("", text: $viewState.genre)
+                }
+            }
+            VStack(alignment: .leading) {
+                Text("Comment")
+                TextField("", text: $viewState.comment)
+                Text("Composer")
+                TextField("", text: $viewState.composer)
+                Text("Disc")
+                HStack {
+                    TextField("", text: $viewState.discPart)
+                    Text("/")
+                    TextField("", text: $viewState.discTotal)
+                    Spacer(minLength: 200)
                 }
             }
         }
@@ -63,6 +78,11 @@ struct Mp3TagView: View {
         viewState.trackPart = singleOrMultipleValues(keyPath: \.trackPart)
         viewState.trackTotal = singleOrMultipleValues(keyPath: \.trackTotal)
         viewState.genre = singleOrMultipleValues(keyPath: \.genre)
+        viewState.comment = singleOrMultipleValues(keyPath: \.comment)
+        viewState.albumArtist = singleOrMultipleValues(keyPath: \.albumArtist)
+        viewState.composer = singleOrMultipleValues(keyPath: \.composer)
+        viewState.discPart = singleOrMultipleValues(keyPath: \.discPart)
+        viewState.discTotal = singleOrMultipleValues(keyPath: \.discTotal)
     }
 }
 
@@ -81,5 +101,10 @@ private extension Mp3TagView {
         @Published var trackPart: String = ""
         @Published var trackTotal: String = ""
         @Published var genre: String = ""
+        @Published var comment: String = ""
+        @Published var albumArtist: String = ""
+        @Published var composer: String = ""
+        @Published var discPart: String = ""
+        @Published var discTotal: String = ""
     }
 }

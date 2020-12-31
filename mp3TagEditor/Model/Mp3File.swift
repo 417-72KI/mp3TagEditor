@@ -132,6 +132,9 @@ extension Mp3File {
     var recordingDateTime: RecordingDateTime? {
         (id3Tag?.frames[.recordingDateTime] as? ID3FrameRecordingDateTime)?.recordingDateTime
     }
+    var comment: String? {
+        (id3Tag?.frames[.comment(.unknown)] as? ID3FrameWithStringContent)?.content
+    }
 }
 
 extension RecordingDateTime: Equatable {
