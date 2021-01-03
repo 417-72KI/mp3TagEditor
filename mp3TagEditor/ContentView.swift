@@ -12,7 +12,7 @@ struct ContentView: View {
     @ObservedObject private var viewState = ViewState()
 
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             Mp3TagView(mp3Files: viewState.selectedContents)
             Mp3FileTableView(contents: $viewState.files,
                              selectedContents: $viewState.selectedContents)
