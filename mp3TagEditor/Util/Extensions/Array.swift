@@ -28,4 +28,19 @@ extension Array {
         }
         return .multipleValues(values)
     }
+
+    func singleOrMultipleValues<T: Equatable>(_ closure: (Element) -> T) -> SingleOrMultipleValues<T> {
+        guard !isEmpty else { return .none }
+
+        func allEquals(_ values: [T]) -> Bool {
+            true
+        }
+        var values = map { closure($0) }
+        let first = values.removeFirst()
+
+        if !values.contains(where: { $0 != first }) {
+            return .singleValue(first)
+        }
+        return .multipleValues(values)
+    }
 }

@@ -132,8 +132,15 @@ extension Mp3File {
     var recordingDateTime: RecordingDateTime? {
         (id3Tag?.frames[.recordingDateTime] as? ID3FrameRecordingDateTime)?.recordingDateTime
     }
-    var comment: String? {
-        (id3Tag?.frames[.comment(.unknown)] as? ID3FrameWithStringContent)?.content
+}
+
+extension Mp3File {
+    func comment(_ language: ID3FrameContentLanguage) -> String? {
+        (id3Tag?.frames[.comment(language)] as? ID3FrameWithStringContent)?.content
+    }
+
+    func thumbnail(_ pictureType: ID3PictureType) -> ID3FrameAttachedPicture? {
+        id3Tag?.frames[.attachedPicture(pictureType)] as? ID3FrameAttachedPicture
     }
 }
 
