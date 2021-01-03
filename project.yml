@@ -20,6 +20,9 @@ packages:
   ID3TagEditor:
     url: https://github.com/chicio/ID3TagEditor
     from: 4.1.1
+  XCGLogger: 
+    url: https://github.com/DaveWoodCom/XCGLogger.git
+    from: 7.0.1
 
 targets:
   mp3TagEditor:
@@ -57,6 +60,7 @@ targets:
         OTHER_SWIFT_FLAGS: $(inherited) -Xfrontend -warn-long-expression-type-checking=500 -Xfrontend -warn-long-function-bodies=500
     dependencies:
       - package: ID3TagEditor
+      - package: XCGLogger
 
   mp3TagEditorTests:
     type: bundle.unit-test

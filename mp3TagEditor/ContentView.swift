@@ -46,21 +46,21 @@ private extension ContentView {
                     .map(url.appendingPathComponent(_:))
                     .forEach(addFiles(withUrl:))
             } catch {
-                print(error)
+                logger.warning("\(error): \(url.path)")
             }
             return
         }
 
         guard !viewState.files.compactMap(\.filePath)
                 .contains(url.path) else {
-            print("\(url) already added.")
+            logger.warning("\(url) already added.")
             return
         }
         do {
             let mp3File = try Mp3File(path: url.path)
             viewState.files.append(mp3File)
         } catch {
-            print(error)
+            logger.warning("\(error): \(url.path)")
         }
     }
 }
