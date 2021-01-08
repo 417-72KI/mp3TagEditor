@@ -144,6 +144,20 @@ extension Mp3File {
     }
 }
 
+extension Mp3File {
+    var comments: [ID3FrameContentLanguage: String] {
+        ID3FrameContentLanguage.allCases
+            .map { ($0, comment($0)) }
+            .reduce(into: [:]) { $0[$1.0] = $1.1 }
+    }
+
+    var thumbnails: [ID3PictureType: ID3FrameAttachedPicture] {
+        ID3PictureType.allCases
+            .map { ($0, thumbnail($0)) }
+            .reduce(into: [:]) { $0[$1.0] = $1.1 }
+    }
+}
+
 extension RecordingDateTime: Equatable {
     public static func == (lhs: RecordingDateTime, rhs: RecordingDateTime) -> Bool {
         lhs.date == rhs.date && lhs.time == rhs.time
