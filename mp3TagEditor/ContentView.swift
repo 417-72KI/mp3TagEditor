@@ -16,6 +16,11 @@ struct ContentView: View {
             Mp3TagView(mp3Files: viewState.selectedContents)
             Mp3FileTableView(contents: $viewState.files,
                              selectedContents: $viewState.selectedContents)
+                .onDeleteCommand {
+                    let indicies = viewState.selectedContents
+                        .compactMap(viewState.files.firstIndex(of:))
+                    viewState.files.remove(atOffsets: IndexSet(indicies))
+                }
                 .frame(minWidth: 320)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
