@@ -41,7 +41,17 @@ struct Mp3FileTableView: NSViewRepresentable {
         guard let tableView = nsView.documentView as? NSTableView else { return }
         context.coordinator.contents = contents
         context.coordinator.sortingKey = sortingKey
+
+        let selectRowIndicies = selectedIndicies.map { contents[$0] }
+            .compactMap(context.coordinator.sortedContents.firstIndex(of:))
+            .asIndexSet()
+
         tableView.reloadData()
+
+        if tableView.selectedRowIndexes != selectRowIndicies {
+            tableView.selectRowIndexes(selectRowIndicies,
+                                       byExtendingSelection: false)
+        }
     }
 
     func makeCoordinator() -> Coordinator {
@@ -136,16 +146,16 @@ extension Mp3FileTableView.Coordinator: NSTableViewDelegate {
         guard let tableView = notification.object as? NSTableView else { return }
         let selectedRowIndexes = tableView.selectedRowIndexes
             .map { sortedContents[$0] }
-            .compactMap(parent.contents.firstIndex(of:))
+            .compactMap(contents.firstIndex(of:))
         if !selectedRowIndexes.isEmpty {
             selectedRowIndexes.forEach {
                 do {
-                    try parent.contents[$0].reload()
+                    try contents[$0].reload()
                 } catch {
                     logger.error(error)
                 }
             }
-            contents = parent.contents
+            parent.contents = contents
         }
         parent.selectedIndicies = selectedRowIndexes
     }
