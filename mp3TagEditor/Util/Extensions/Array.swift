@@ -44,3 +44,11 @@ extension Array {
         return .multipleValues(values)
     }
 }
+
+extension Array where Element == Int {
+    func asIndexSet() -> IndexSet { IndexSet(self) }
+}
+
+extension IndexSet {
+    func asArray() -> [Int] { map { $0 } }
+}

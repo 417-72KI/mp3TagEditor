@@ -13,13 +13,14 @@ struct ContentView: View {
 
     var body: some View {
         HStack(alignment: .top) {
-            Mp3TagView(mp3Files: viewState.selectedContents)
+            Mp3TagView(mp3Files: viewState.selectedFiles)
             Mp3FileTableView(contents: $viewState.files,
-                             selectedContents: $viewState.selectedContents)
+                             selectedIndicies: $viewState.selectedIndicies)
                 .onDeleteCommand {
-                    let indicies = viewState.selectedContents
-                        .compactMap(viewState.files.firstIndex(of:))
-                    viewState.files.remove(atOffsets: IndexSet(indicies))
+                    logger.debug(viewState.selectedIndicies)
+                    viewState.files
+                        .remove(atOffsets: IndexSet(viewState.selectedIndicies))
+                    viewState.selectedIndicies = []
                 }
                 .frame(minWidth: 320)
         }
@@ -73,7 +74,13 @@ private extension ContentView {
 private extension ContentView {
     final class ViewState: ObservableObject {
         @Published var files: [Mp3File] = []
-        @Published var selectedContents: [Mp3File] = []
+        @Published var selectedIndicies: [Int] = []
+    }
+}
+
+extension ContentView.ViewState {
+    var selectedFiles: [Mp3File] {
+        selectedIndicies.map { files[$0] }
     }
 }
 

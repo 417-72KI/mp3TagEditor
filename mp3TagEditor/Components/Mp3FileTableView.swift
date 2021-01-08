@@ -12,7 +12,7 @@ struct Mp3FileTableView: NSViewRepresentable {
     typealias NSViewType = NSScrollView
 
     @Binding var contents: [Mp3File]
-    @Binding var selectedContents: [Mp3File]
+    @Binding var selectedIndicies: [Int]
     @State private var sortingKey: (PartialKeyPath<Mp3File>, Bool)?
 
     func makeNSView(context: Context) -> NSScrollView {
@@ -135,20 +135,19 @@ extension Mp3FileTableView.Coordinator: NSTableViewDelegate {
     func tableViewSelectionDidChange(_ notification: Notification) {
         guard let tableView = notification.object as? NSTableView else { return }
         let selectedRowIndexes = tableView.selectedRowIndexes
+            .map { sortedContents[$0] }
+            .compactMap(parent.contents.firstIndex(of:))
         if !selectedRowIndexes.isEmpty {
-            selectedRowIndexes.map { sortedContents[$0] }
-                .compactMap(parent.contents.firstIndex(of:))
-                .forEach {
-                    do {
-                        try parent.contents[$0].reload()
-                    } catch {
-                        logger.error(error)
-                    }
+            selectedRowIndexes.forEach {
+                do {
+                    try parent.contents[$0].reload()
+                } catch {
+                    logger.error(error)
                 }
+            }
             contents = parent.contents
         }
-
-        parent.selectedContents = selectedRowIndexes.map { sortedContents[$0] }
+        parent.selectedIndicies = selectedRowIndexes
     }
 
     func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
@@ -163,6 +162,6 @@ extension Mp3FileTableView.Coordinator: NSTableViewDelegate {
 struct Mp3FileTableView_Previews: PreviewProvider {
     static var previews: some View {
         Mp3FileTableView(contents: .constant([]),
-                         selectedContents: .constant([]))
+                         selectedIndicies: .constant([]))
     }
 }
