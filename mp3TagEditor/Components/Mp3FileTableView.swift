@@ -127,6 +127,8 @@ extension Mp3FileTableView.Coordinator: NSTableViewDataSource {
             return content.artist
         case .album:
             return content.album
+        case .albumArtist:
+            return content.albumArtist
         case .filePath:
             guard case let .path(filePath) = content.source else { return nil }
             return filePath
