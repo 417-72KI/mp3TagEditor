@@ -28,24 +28,18 @@ public struct Mp3File {
     }
 }
 
-extension Mp3File: Equatable {
-    public static func == (lhs: Mp3File, rhs: Mp3File) -> Bool {
-        switch (lhs.source, rhs.source) {
-        case let (.path(lPath), .path(rPath)):
-            return lPath == rPath
-        case let (.data(lData), .data(rData)):
-            return lData == rData
-        default:
-            return false
-        }
-    }
-}
-
 // MARK: -
 extension Mp3File {
     var filePath: String? {
         guard case let .path(filePath) = source else { return nil }
         return filePath
+    }
+}
+
+extension Mp3File {
+    mutating func reload() throws {
+        guard case let .path(path) = source else { return }
+        id3Tag = try ID3TagEditor().read(from: path)
     }
 }
 
@@ -155,6 +149,20 @@ extension Mp3File {
         ID3PictureType.allCases
             .map { ($0, thumbnail($0)) }
             .reduce(into: [:]) { $0[$1.0] = $1.1 }
+    }
+}
+
+// MARK: - Equatable
+extension Mp3File: Equatable {
+    public static func == (lhs: Mp3File, rhs: Mp3File) -> Bool {
+        switch (lhs.source, rhs.source) {
+        case let (.path(lPath), .path(rPath)):
+            return lPath == rPath
+        case let (.data(lData), .data(rData)):
+            return lData == rData
+        default:
+            return false
+        }
     }
 }
 

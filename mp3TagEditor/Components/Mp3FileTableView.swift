@@ -134,7 +134,21 @@ extension Mp3FileTableView.Coordinator: NSTableViewDelegate {
 
     func tableViewSelectionDidChange(_ notification: Notification) {
         guard let tableView = notification.object as? NSTableView else { return }
-        parent.selectedContents = tableView.selectedRowIndexes.map { sortedContents[$0] }
+        let selectedRowIndexes = tableView.selectedRowIndexes
+        if !selectedRowIndexes.isEmpty {
+            selectedRowIndexes.map { sortedContents[$0] }
+                .compactMap(parent.contents.firstIndex(of:))
+                .forEach {
+                    do {
+                        try parent.contents[$0].reload()
+                    } catch {
+                        logger.error(error)
+                    }
+                }
+            contents = parent.contents
+        }
+
+        parent.selectedContents = selectedRowIndexes.map { sortedContents[$0] }
     }
 
     func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
