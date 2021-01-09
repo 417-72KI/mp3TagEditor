@@ -58,11 +58,19 @@ struct Mp3TagView: View {
                     Spacer(minLength: 180)
                 }
             }
-//            ScrollView {
-//                HStack {
-//                    ForEach(
-//                }
-//            }
+            Group {
+                Text("Thumbnail")
+                ZStack {
+                    if let thumbnail = viewState.thumbnail
+                        .flatMap(NSImage.init(data:)) {
+                        Image(nsImage: thumbnail)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    }
+                }.frame(width: 120, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .padding(8)
+                .border(Color.secondary, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+            }
         }
         .frame(width: 320)
         .padding(8)
@@ -94,7 +102,7 @@ private extension Mp3TagView {
         @Published var composer: String
         @Published var discPart: String
         @Published var discTotal: String
-        @Published var thumbnail: Image?
+        @Published var thumbnail: Data?
 
         private let initialValue: InitialValue
         private let isEmpty: Bool
@@ -132,7 +140,15 @@ private extension Mp3TagView {
                 composer: singleOrMultipleValues(keyPath: \.composer),
                 discPart: singleOrMultipleValues(keyPath: \.discPart),
                 discTotal: singleOrMultipleValues(keyPath: \.discTotal),
-                thumbnail: nil
+                thumbnail: {
+                    logger.debug(mp3Files.singleOrMultipleValues(\.thumbnails))
+                    switch mp3Files.singleOrMultipleValues({ $0.thumbnail(.other) }) {
+                    case let .singleValue(value):
+                        return value.map(\.picture)
+                    case .multipleValues, .none:
+                        return nil
+                    }
+                }()
             )
             title = initialValue.title
             artist = initialValue.artist
@@ -166,7 +182,7 @@ extension Mp3TagView.ViewState {
         var composer: String
         var discPart: String
         var discTotal: String
-        var thumbnail: Image?
+        var thumbnail: Data?
     }
 }
 
