@@ -136,6 +136,13 @@ extension Mp3FileTableView.Coordinator: NSTableViewDataSource {
             return nil
         }
     }
+
+    func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
+        guard let newValue = object as? String,
+              let tableColumn = tableColumn.map(\.identifier.rawValue)
+                .flatMap(Mp3FileTableView.Column.init) else { return }
+        logger.debug((newValue, tableColumn, row))
+    }
 }
 
 // MARK: - NSTableViewDelegate
