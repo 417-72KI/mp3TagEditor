@@ -46,85 +46,112 @@ extension Mp3File {
 // MARK: -
 extension Mp3File {
     var title: String? {
-        (id3Tag?.frames[.title] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.title] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var album: String? {
-        (id3Tag?.frames[.album] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.album] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var albumArtist: String? {
-        (id3Tag?.frames[.albumArtist] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.albumArtist] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var artist: String? {
-        (id3Tag?.frames[.artist] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.artist] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var composer: String? {
-        (id3Tag?.frames[.composer] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.composer] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var conductor: String? {
-        (id3Tag?.frames[.conductor] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.conductor] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var contentGrouping: String? {
-        (id3Tag?.frames[.contentGrouping] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.contentGrouping] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var copyright: String? {
-        (id3Tag?.frames[.copyright] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.copyright] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var encodedBy: String? {
-        (id3Tag?.frames[.encodedBy] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.encodedBy] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var encoderSettings: String? {
-        (id3Tag?.frames[.encoderSettings] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.encoderSettings] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var fileOwner: String? {
-        (id3Tag?.frames[.fileOwner] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.fileOwner] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var lyricist: String? {
-        (id3Tag?.frames[.lyricist] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.lyricist] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var mixArtist: String? {
-        (id3Tag?.frames[.mixArtist] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.mixArtist] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var publisher: String? {
-        (id3Tag?.frames[.publisher] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.publisher] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var subtitle: String? {
-        (id3Tag?.frames[.subtitle] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.subtitle] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var beatsPerMinute: Int? {
-        (id3Tag?.frames[.beatsPerMinute] as? ID3FrameWithIntegerContent)?.value
+        get { (id3Tag?.frames[.beatsPerMinute] as? ID3FrameWithIntegerContent)?.value }
+        set { logger.debug(newValue) }
     }
     var originalFilename: String? {
-        (id3Tag?.frames[.originalFilename] as? ID3FrameWithStringContent)?.content
+        get { (id3Tag?.frames[.originalFilename] as? ID3FrameWithStringContent)?.content }
+        set { logger.debug(newValue) }
     }
     var lengthInMilliseconds: Int? {
-        (id3Tag?.frames[.lengthInMilliseconds] as? ID3FrameWithIntegerContent)?.value
+        get { (id3Tag?.frames[.lengthInMilliseconds] as? ID3FrameWithIntegerContent)?.value }
+        set { logger.debug(newValue) }
     }
     var sizeInBytes: Int? {
-        (id3Tag?.frames[.sizeInBytes] as? ID3FrameWithIntegerContent)?.value
+        get { (id3Tag?.frames[.sizeInBytes] as? ID3FrameWithIntegerContent)?.value }
+        set { logger.debug(newValue) }
     }
     var genre: String? {
-        (id3Tag?.frames[.genre] as? ID3FrameGenre)?.description
+        get { (id3Tag?.frames[.genre] as? ID3FrameGenre)?.description }
+        set { logger.debug(newValue) }
     }
     var discPosition: ID3FramePartOfTotal? {
-        id3Tag?.frames[.discPosition] as? ID3FramePartOfTotal
+        get { id3Tag?.frames[.discPosition] as? ID3FramePartOfTotal }
+        set { logger.debug(newValue) }
     }
     var discPart: Int? {
-        discPosition?.part
+        get { discPosition?.part }
+        set { logger.debug(newValue) }
     }
     var discTotal: Int? {
-        discPosition?.total
+        get { discPosition?.total }
+        set { logger.debug(newValue) }
     }
     var trackPosition: ID3FramePartOfTotal? {
-        id3Tag?.frames[.trackPosition] as? ID3FramePartOfTotal
+        get { id3Tag?.frames[.trackPosition] as? ID3FramePartOfTotal }
+        set { logger.debug(newValue) }
     }
     var trackPart: Int? {
-        trackPosition?.part
+        get { trackPosition?.part }
+        set { logger.debug(newValue) }
     }
     var trackTotal: Int? {
-        trackPosition?.total
+        get { trackPosition?.total }
+        set { logger.debug(newValue) }
     }
     var recordingDateTime: RecordingDateTime? {
-        (id3Tag?.frames[.recordingDateTime] as? ID3FrameRecordingDateTime)?.recordingDateTime
+        get { (id3Tag?.frames[.recordingDateTime] as? ID3FrameRecordingDateTime)?.recordingDateTime }
+        set { logger.debug(newValue) }
     }
 }
 
