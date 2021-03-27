@@ -11,6 +11,8 @@ import SwiftUI
 struct Mp3FileTableView: NSViewRepresentable {
     typealias NSViewType = NSScrollView
 
+    @Environment(\.undoManager) var undoManager
+
     @Binding var contents: [Mp3File]
     @Binding var selectedIndicies: [Int]
     @State private var sortingKey: (PartialKeyPath<Mp3File>, Bool)?
@@ -140,19 +142,73 @@ extension Mp3FileTableView.Coordinator: NSTableViewDataSource {
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
         guard let newValue = object as? String,
               let tableColumn = tableColumn.map(\.identifier.rawValue)
-                .flatMap(Mp3FileTableView.Column.init),
-              let index = contents.firstIndex(of: sortedContents[row]) else { return }
+                .flatMap(Mp3FileTableView.Column.init) else { return }
+        let content = sortedContents[row]
         switch tableColumn {
         case .title:
-            contents[index].title = newValue
+            updateTitle(for: content, newValue)
         case .artist:
-            contents[index].artist = newValue
+           updateArtist(for: content, newValue)
         case .album:
-            contents[index].album = newValue
+            updateAlbum(for: content, newValue)
         case .albumArtist:
-            contents[index].albumArtist = newValue
+            updateAlbumArtist(for: content, newValue)
         default:
             break
+        }
+    }
+}
+
+private extension Mp3FileTableView.Coordinator {
+    func updateTitle(for content: Mp3File, _ newValue: String?) {
+        do {
+            let oldTitle = content.title
+            content.title = newValue
+            try content.save()
+            parent.undoManager?.registerUndo(withTarget: content) { [weak self] in
+                self?.updateTitle(for: $0, oldTitle)
+            }
+        } catch {
+            logger.error(error)
+        }
+    }
+
+    func updateArtist(for content: Mp3File, _ newValue: String?) {
+        do {
+            let oldArtist = content.artist
+            content.artist = newValue
+            try content.save()
+            parent.undoManager?.registerUndo(withTarget: content) { [weak self] in
+                self?.updateArtist(for: $0, oldArtist)
+            }
+        } catch {
+            logger.error(error)
+        }
+    }
+
+    func updateAlbum(for content: Mp3File, _ newValue: String?) {
+        do {
+            let oldAlbum = content.album
+            content.album = newValue
+            try content.save()
+            parent.undoManager?.registerUndo(withTarget: content) { [weak self] in
+                self?.updateAlbum(for: $0, oldAlbum)
+            }
+        } catch {
+            logger.error(error)
+        }
+    }
+
+    func updateAlbumArtist(for content: Mp3File, _ newValue: String?) {
+        do {
+            let oldAlbumArtist = content.albumArtist
+            content.albumArtist = newValue
+            try content.save()
+            parent.undoManager?.registerUndo(withTarget: content) { [weak self] in
+                self?.updateAlbumArtist(for: $0, oldAlbumArtist)
+            }
+        } catch {
+            logger.error(error)
         }
     }
 }

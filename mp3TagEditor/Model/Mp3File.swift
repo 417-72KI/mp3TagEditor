@@ -8,14 +8,14 @@
 import Foundation
 import ID3TagEditor
 
-public struct Mp3File {
+public class Mp3File {
     enum Source {
         case path(String)
         case data(Data)
     }
 
-    let source: Source
-    var id3Tag: ID3Tag?
+    private(set) var source: Source
+    private(set) var id3Tag: ID3Tag?
     private(set) var isModified: Bool
 
     init(path: String) throws {
@@ -40,13 +40,13 @@ extension Mp3File {
 }
 
 extension Mp3File {
-    mutating func reload() throws {
+    func reload() throws {
         guard case let .path(path) = source else { return }
         id3Tag = try ID3TagEditor().read(from: path)
         isModified = false
     }
 
-    mutating func save() throws {
+    func save() throws {
         guard isModified else { return }
         defer { isModified = false }
 
@@ -54,7 +54,7 @@ extension Mp3File {
         let editor = ID3TagEditor()
         switch source {
         case let .data(data):
-            self = try .init(data: editor.write(tag: id3Tag, mp3: data))
+            source = try .data(editor.write(tag: id3Tag, mp3: data))
         case let .path(path):
             try editor.write(tag: id3Tag, to: path)
         }
@@ -66,40 +66,40 @@ extension Mp3File {
     var title: String? {
         get { (id3Tag?.frames[.title] as? ID3FrameWithStringContent)?.content }
         set {
-            guard let newValue = newValue, newValue != title else { return }
-            id3Tag?.frames[.title] = ID3FrameWithStringContent(content: newValue)
+            guard newValue != title else { return }
+            id3Tag?.frames[.title] = newValue.flatMap(ID3FrameWithStringContent.init(content:))
             isModified = true
         }
     }
     var album: String? {
         get { (id3Tag?.frames[.album] as? ID3FrameWithStringContent)?.content }
         set {
-            guard let newValue = newValue, newValue != album else { return }
-            id3Tag?.frames[.album] = ID3FrameWithStringContent(content: newValue)
+            guard newValue != album else { return }
+            id3Tag?.frames[.album] = newValue.flatMap(ID3FrameWithStringContent.init(content:))
             isModified = true
         }
     }
     var albumArtist: String? {
         get { (id3Tag?.frames[.albumArtist] as? ID3FrameWithStringContent)?.content }
         set {
-            guard let newValue = newValue, newValue != albumArtist else { return }
-            id3Tag?.frames[.albumArtist] = ID3FrameWithStringContent(content: newValue)
+            guard newValue != albumArtist else { return }
+            id3Tag?.frames[.albumArtist] = newValue.flatMap(ID3FrameWithStringContent.init(content:))
             isModified = true
         }
     }
     var artist: String? {
         get { (id3Tag?.frames[.artist] as? ID3FrameWithStringContent)?.content }
         set {
-            guard let newValue = newValue, newValue != artist else { return }
-            id3Tag?.frames[.artist] = ID3FrameWithStringContent(content: newValue)
+            guard newValue != artist else { return }
+            id3Tag?.frames[.artist] = newValue.flatMap(ID3FrameWithStringContent.init(content:))
             isModified = true
         }
     }
     var composer: String? {
         get { (id3Tag?.frames[.composer] as? ID3FrameWithStringContent)?.content }
         set {
-            guard let newValue = newValue, newValue != composer else { return }
-            id3Tag?.frames[.composer] = ID3FrameWithStringContent(content: newValue)
+            guard newValue != composer else { return }
+            id3Tag?.frames[.composer] = newValue.flatMap(ID3FrameWithStringContent.init(content:))
             isModified = true
         }
     }
@@ -144,8 +144,8 @@ extension Mp3File {
     var beatsPerMinute: Int? {
         get { (id3Tag?.frames[.beatsPerMinute] as? ID3FrameWithIntegerContent)?.value }
         set {
-            guard let newValue = newValue, newValue != beatsPerMinute else { return }
-            id3Tag?.frames[.beatsPerMinute] = ID3FrameWithIntegerContent(value: newValue)
+            guard newValue != beatsPerMinute else { return }
+            id3Tag?.frames[.beatsPerMinute] = newValue.flatMap(ID3FrameWithIntegerContent.init(value:))
             isModified = true
         }
     }
@@ -185,7 +185,7 @@ extension Mp3File {
     var discTotal: Int? {
         get { discPosition?.total }
         set {
-            guard let newValue = newValue, newValue != discTotal else { return }
+            guard newValue != discTotal else { return }
             if let discPosition = discPosition {
                 discPosition.total = newValue
             } else {
