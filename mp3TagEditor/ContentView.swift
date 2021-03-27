@@ -9,18 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var dragOver = false
-    @ObservedObject private var viewState = ViewState()
+    @ObservedObject var fileListStore: FileListStore
 
     var body: some View {
         HStack(alignment: .top) {
-            Mp3TagView(mp3Files: viewState.selectedFiles)
-            Mp3FileTableView(contents: $viewState.files,
-                             selectedIndicies: $viewState.selectedIndicies)
+            Mp3TagView(mp3Files: fileListStore.selectedFiles)
+            Mp3FileTableView(contents: $fileListStore.files,
+                             selectedIndicies: $fileListStore.selectedIndicies)
                 .onDeleteCommand {
-                    logger.debug(viewState.selectedIndicies)
-                    viewState.files
-                        .remove(atOffsets: IndexSet(viewState.selectedIndicies))
-                    viewState.selectedIndicies = []
+                    logger.debug(fileListStore.selectedIndicies)
+                    fileListStore.files
+                        .remove(atOffsets: IndexSet(fileListStore.selectedIndicies))
+                    fileListStore.selectedIndicies = []
                 }
                 .frame(minWidth: 320)
         }
@@ -57,35 +57,22 @@ private extension ContentView {
             return
         }
 
-        guard !viewState.files.compactMap(\.filePath)
+        guard !fileListStore.files.compactMap(\.filePath)
                 .contains(url.path) else {
             logger.warning("\(url) already added.")
             return
         }
         do {
             let mp3File = try Mp3File(path: url.path)
-            viewState.files.append(mp3File)
+            fileListStore.files.append(mp3File)
         } catch {
             logger.warning("\(error): \(url.path)")
         }
     }
 }
 
-private extension ContentView {
-    final class ViewState: ObservableObject {
-        @Published var files: [Mp3File] = []
-        @Published var selectedIndicies: [Int] = []
-    }
-}
-
-extension ContentView.ViewState {
-    var selectedFiles: [Mp3File] {
-        selectedIndicies.map { files[$0] }
-    }
-}
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(fileListStore: .init())
     }
 }

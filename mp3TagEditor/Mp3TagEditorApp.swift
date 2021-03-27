@@ -11,9 +11,11 @@ import SwiftUI
 struct Mp3TagEditorApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    var body: some Scene {
+    @StateObject private var fileListStore = FileListStore()
+
+    @SceneBuilder var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(fileListStore: fileListStore)
         }.commands {
             CommandGroup(replacing: .newItem) { }
         }
