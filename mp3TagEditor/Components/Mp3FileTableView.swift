@@ -140,8 +140,20 @@ extension Mp3FileTableView.Coordinator: NSTableViewDataSource {
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
         guard let newValue = object as? String,
               let tableColumn = tableColumn.map(\.identifier.rawValue)
-                .flatMap(Mp3FileTableView.Column.init) else { return }
-        logger.debug((newValue, tableColumn, row))
+                .flatMap(Mp3FileTableView.Column.init),
+              let index = contents.firstIndex(of: sortedContents[row]) else { return }
+        switch tableColumn {
+        case .title:
+            contents[index].title = newValue
+        case .artist:
+            contents[index].artist = newValue
+        case .album:
+            contents[index].album = newValue
+        case .albumArtist:
+            contents[index].albumArtist = newValue
+        default:
+            break
+        }
     }
 }
 
@@ -174,6 +186,17 @@ extension Mp3FileTableView.Coordinator: NSTableViewDelegate {
               let column = sortDescriptor.key
                 .flatMap(Mp3FileTableView.Column.init) else { return }
         parent.sortingKey = (column.keyPath, sortDescriptor.ascending)
+    }
+
+    func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
+        guard let tableColumn = tableColumn.map(\.identifier.rawValue)
+                .flatMap(Mp3FileTableView.Column.init) else { return false }
+        switch tableColumn {
+        case .filePath:
+            return false
+        default:
+            return true
+        }
     }
 }
 

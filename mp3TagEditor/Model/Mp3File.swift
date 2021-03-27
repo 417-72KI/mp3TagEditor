@@ -16,15 +16,18 @@ public struct Mp3File {
 
     let source: Source
     var id3Tag: ID3Tag?
+    private(set) var isModified: Bool
 
     init(path: String) throws {
         self.source = .path(path)
         self.id3Tag = try ID3TagEditor().read(from: path)
+        self.isModified = false
     }
 
     init(data: Data) throws {
         self.source = .data(data)
         self.id3Tag = try ID3TagEditor().read(mp3: data)
+        self.isModified = false
     }
 }
 
@@ -40,6 +43,21 @@ extension Mp3File {
     mutating func reload() throws {
         guard case let .path(path) = source else { return }
         id3Tag = try ID3TagEditor().read(from: path)
+        isModified = false
+    }
+
+    mutating func save() throws {
+        guard isModified else { return }
+        defer { isModified = false }
+
+        guard let id3Tag = id3Tag else { return }
+        let editor = ID3TagEditor()
+        switch source {
+        case let .data(data):
+            self = try .init(data: editor.write(tag: id3Tag, mp3: data))
+        case let .path(path):
+            try editor.write(tag: id3Tag, to: path)
+        }
     }
 }
 
@@ -47,23 +65,43 @@ extension Mp3File {
 extension Mp3File {
     var title: String? {
         get { (id3Tag?.frames[.title] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        set {
+            guard let newValue = newValue, newValue != title else { return }
+            id3Tag?.frames[.title] = ID3FrameWithStringContent(content: newValue)
+            isModified = true
+        }
     }
     var album: String? {
         get { (id3Tag?.frames[.album] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        set {
+            guard let newValue = newValue, newValue != album else { return }
+            id3Tag?.frames[.album] = ID3FrameWithStringContent(content: newValue)
+            isModified = true
+        }
     }
     var albumArtist: String? {
         get { (id3Tag?.frames[.albumArtist] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        set {
+            guard let newValue = newValue, newValue != albumArtist else { return }
+            id3Tag?.frames[.albumArtist] = ID3FrameWithStringContent(content: newValue)
+            isModified = true
+        }
     }
     var artist: String? {
         get { (id3Tag?.frames[.artist] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        set {
+            guard let newValue = newValue, newValue != artist else { return }
+            id3Tag?.frames[.artist] = ID3FrameWithStringContent(content: newValue)
+            isModified = true
+        }
     }
     var composer: String? {
         get { (id3Tag?.frames[.composer] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        set {
+            guard let newValue = newValue, newValue != composer else { return }
+            id3Tag?.frames[.composer] = ID3FrameWithStringContent(content: newValue)
+            isModified = true
+        }
     }
     var conductor: String? {
         get { (id3Tag?.frames[.conductor] as? ID3FrameWithStringContent)?.content }
@@ -78,48 +116,47 @@ extension Mp3File {
         set { logger.debug(newValue) }
     }
     var encodedBy: String? {
-        get { (id3Tag?.frames[.encodedBy] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        (id3Tag?.frames[.encodedBy] as? ID3FrameWithStringContent)?.content
     }
     var encoderSettings: String? {
-        get { (id3Tag?.frames[.encoderSettings] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        (id3Tag?.frames[.encoderSettings] as? ID3FrameWithStringContent)?.content
     }
     var fileOwner: String? {
         get { (id3Tag?.frames[.fileOwner] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        // set { logger.debug(newValue) }
     }
     var lyricist: String? {
         get { (id3Tag?.frames[.lyricist] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        // set { logger.debug(newValue) }
     }
     var mixArtist: String? {
         get { (id3Tag?.frames[.mixArtist] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        // set { logger.debug(newValue) }
     }
     var publisher: String? {
         get { (id3Tag?.frames[.publisher] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        // set { logger.debug(newValue) }
     }
     var subtitle: String? {
         get { (id3Tag?.frames[.subtitle] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        // set { logger.debug(newValue) }
     }
     var beatsPerMinute: Int? {
         get { (id3Tag?.frames[.beatsPerMinute] as? ID3FrameWithIntegerContent)?.value }
-        set { logger.debug(newValue) }
+        set {
+            guard let newValue = newValue, newValue != beatsPerMinute else { return }
+            id3Tag?.frames[.beatsPerMinute] = ID3FrameWithIntegerContent(value: newValue)
+            isModified = true
+        }
     }
     var originalFilename: String? {
-        get { (id3Tag?.frames[.originalFilename] as? ID3FrameWithStringContent)?.content }
-        set { logger.debug(newValue) }
+        (id3Tag?.frames[.originalFilename] as? ID3FrameWithStringContent)?.content
     }
     var lengthInMilliseconds: Int? {
-        get { (id3Tag?.frames[.lengthInMilliseconds] as? ID3FrameWithIntegerContent)?.value }
-        set { logger.debug(newValue) }
+        (id3Tag?.frames[.lengthInMilliseconds] as? ID3FrameWithIntegerContent)?.value
     }
     var sizeInBytes: Int? {
-        get { (id3Tag?.frames[.sizeInBytes] as? ID3FrameWithIntegerContent)?.value }
-        set { logger.debug(newValue) }
+        (id3Tag?.frames[.sizeInBytes] as? ID3FrameWithIntegerContent)?.value
     }
     var genre: String? {
         get { (id3Tag?.frames[.genre] as? ID3FrameGenre)?.description }
@@ -127,27 +164,67 @@ extension Mp3File {
     }
     var discPosition: ID3FramePartOfTotal? {
         get { id3Tag?.frames[.discPosition] as? ID3FramePartOfTotal }
-        set { logger.debug(newValue) }
+        set {
+            guard newValue != discPosition else { return }
+            id3Tag?.frames[.discPosition] = newValue
+            isModified = true
+        }
     }
     var discPart: Int? {
         get { discPosition?.part }
-        set { logger.debug(newValue) }
+        set {
+            guard let newValue = newValue, newValue != discPart else { return }
+            if let discPosition = discPosition {
+                discPosition.part = newValue
+            } else {
+                discPosition = .init(part: newValue, total: nil)
+            }
+            isModified = true
+        }
     }
     var discTotal: Int? {
         get { discPosition?.total }
-        set { logger.debug(newValue) }
+        set {
+            guard let newValue = newValue, newValue != discTotal else { return }
+            if let discPosition = discPosition {
+                discPosition.total = newValue
+            } else {
+                discPosition = .init(part: 0, total: newValue)
+            }
+            isModified = true
+        }
     }
     var trackPosition: ID3FramePartOfTotal? {
         get { id3Tag?.frames[.trackPosition] as? ID3FramePartOfTotal }
-        set { logger.debug(newValue) }
+        set {
+            guard newValue != trackPosition else { return }
+            id3Tag?.frames[.trackPosition] = newValue
+            isModified = true
+        }
     }
     var trackPart: Int? {
         get { trackPosition?.part }
-        set { logger.debug(newValue) }
+        set {
+            guard let newValue = newValue, newValue != trackPart else { return }
+            if let trackPosition = trackPosition {
+                trackPosition.part = newValue
+            } else {
+                trackPosition = .init(part: newValue, total: nil)
+            }
+            isModified = true
+        }
     }
     var trackTotal: Int? {
         get { trackPosition?.total }
-        set { logger.debug(newValue) }
+        set {
+            guard let newValue = newValue, newValue != trackTotal else { return }
+            if let trackPosition = trackPosition {
+                trackPosition.total = newValue
+            } else {
+                trackPosition = .init(part: 0, total: newValue)
+            }
+            isModified = true
+        }
     }
     var recordingDateTime: RecordingDateTime? {
         get { (id3Tag?.frames[.recordingDateTime] as? ID3FrameRecordingDateTime)?.recordingDateTime }
