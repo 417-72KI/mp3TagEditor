@@ -3,7 +3,7 @@ name: mp3TagEditor
 options:
   bundleIdPrefix: jp.room417
   deploymentTarget:
-    macOS: 10.15
+    macOS: 11.0
   developmentLanguage: ja
   xcodeVersion: "12.3"
 
@@ -48,7 +48,6 @@ targets:
         CFBundleVersion: $(PROJECT_VERSION)
         CFBundleShortVersionString: $(SEMANTIC_VERSION)
         LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
-        NSMainStoryboardFile: Main
         NSPrincipalClass: NSApplication
     entitlements:
       path: mp3TagEditor/Resources/mp3TagEditor.entitlements
