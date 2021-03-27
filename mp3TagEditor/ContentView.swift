@@ -40,6 +40,12 @@ struct ContentView: View {
             }
             return true
         }
+        .sheet(isPresented: $fileListStore.isConverting,
+               onDismiss: { logger.debug("dismiss") },
+               content: {
+            ConvertView(convertList: fileListStore.selectedFiles,
+                        isPresented: $fileListStore.isConverting)
+        })
     }
 }
 

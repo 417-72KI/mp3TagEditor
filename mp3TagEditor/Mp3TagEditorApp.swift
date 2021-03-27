@@ -18,6 +18,15 @@ struct Mp3TagEditorApp: App {
             ContentView(fileListStore: fileListStore)
         }.commands {
             CommandGroup(replacing: .newItem) { }
+            CommandGroup(before: .newItem) {
+                Button("Convert tag to file name") {
+                    guard !fileListStore.selectedFiles.isEmpty,
+                          !fileListStore.isConverting else { return }
+                    fileListStore.isConverting.toggle()
+                }
+                // FIXME: not updated when any files selected
+                //.disabled(fileListStore.selectedFiles.isEmpty)
+            }
         }
     }
 }

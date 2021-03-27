@@ -10,6 +10,7 @@ import Foundation
 final class FileListStore: ObservableObject {
     @Published var files: [Mp3File] = []
     @Published var selectedIndicies: [Int] = []
+    @Published var isConverting: Bool = false
 }
 
 extension FileListStore {

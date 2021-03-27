@@ -8,7 +8,7 @@
 import Foundation
 import ID3TagEditor
 
-public class Mp3File {
+public class Mp3File: Identifiable, ObservableObject {
     enum Source {
         case path(String)
         case data(Data)
