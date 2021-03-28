@@ -230,6 +230,35 @@ extension Mp3File {
         get { (id3Tag?.frames[.recordingDateTime] as? ID3FrameRecordingDateTime)?.recordingDateTime }
         set { logger.debug(newValue) }
     }
+    var recordingYear: Int? {
+        get {
+            guard let id3Tag = id3Tag else { return nil }
+            switch id3Tag.properties.version {
+            case .version2, .version3:
+                return (id3Tag.frames[.recordingYear] as? ID3FrameWithIntegerContent)?.value
+            case .version4:
+                return recordingDateTime?.date?.year
+            }
+        }
+        set {
+            guard let id3Tag = id3Tag, newValue != recordingYear else { return }
+            switch id3Tag.properties.version {
+            case .version2, .version3:
+                id3Tag.frames[.recordingYear] = ID3FrameWithIntegerContent(value: newValue)
+            case .version4:
+                if var recordingDate = recordingDateTime?.date {
+                    recordingDate.year = newValue
+                    recordingDateTime?.date = recordingDate
+                } else if var recordingDateTime = recordingDateTime {
+                    recordingDateTime.date = .init(day: nil, month: nil, year: newValue)
+                    self.recordingDateTime = recordingDateTime
+                } else {
+                    recordingDateTime = .init(date: .init(day: nil, month: nil, year: newValue), time: nil)
+                }
+            }
+            isModified = true
+        }
+    }
 }
 
 extension Mp3File {

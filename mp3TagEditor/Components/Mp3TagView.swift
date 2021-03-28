@@ -122,7 +122,7 @@ private extension Mp3TagView {
                 title: singleOrMultipleValues(keyPath: \.title),
                 artist: singleOrMultipleValues(keyPath: \.artist),
                 album: singleOrMultipleValues(keyPath: \.album),
-                year: singleOrMultipleValues(keyPath: \.recordingDateTime?.date?.year),
+                year: singleOrMultipleValues(keyPath: \.recordingYear),
                 trackPart: singleOrMultipleValues(keyPath: \.trackPart),
                 trackTotal: singleOrMultipleValues(keyPath: \.trackTotal),
                 genre: singleOrMultipleValues(keyPath: \.genre),
