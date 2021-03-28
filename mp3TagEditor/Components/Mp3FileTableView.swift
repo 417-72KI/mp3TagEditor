@@ -68,6 +68,7 @@ extension Mp3FileTableView {
         case artist
         case album
         case albumArtist
+        case track
         case filePath
     }
 }
@@ -81,6 +82,7 @@ extension Mp3FileTableView.Column {
         case .artist: return \.artist
         case .album: return \.album
         case .albumArtist: return \.albumArtist
+        case .track: return \.trackPositionString
         case .filePath: return \.filePath
         }
     }
@@ -120,9 +122,11 @@ extension Mp3FileTableView.Coordinator: NSTableViewDataSource {
     }
 
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        guard let tableColumn = tableColumn else { return nil }
+        guard let column = tableColumn
+                .map(\.identifier.rawValue)
+                .flatMap(Mp3FileTableView.Column.init(rawValue:)) else { return nil }
         let content = sortedContents[row]
-        switch Mp3FileTableView.Column(rawValue: tableColumn.identifier.rawValue) {
+        switch column {
         case .title:
             return content.title
         case .artist:
@@ -131,11 +135,11 @@ extension Mp3FileTableView.Coordinator: NSTableViewDataSource {
             return content.album
         case .albumArtist:
             return content.albumArtist
+        case .track:
+            return content.trackPositionString
         case .filePath:
             guard case let .path(filePath) = content.source else { return nil }
             return filePath
-        default:
-            return nil
         }
     }
 
@@ -151,10 +155,12 @@ extension Mp3FileTableView.Coordinator: NSTableViewDataSource {
            updateArtist(for: content, newValue)
         case .album:
             updateAlbum(for: content, newValue)
+        case .track:
+            updateTrack(for: content, newValue)
         case .albumArtist:
             updateAlbumArtist(for: content, newValue)
-        default:
-            break
+        case .filePath:
+            fatalError("filePath cannot modify")
         }
     }
 }
@@ -193,6 +199,19 @@ private extension Mp3FileTableView.Coordinator {
             try content.save()
             parent.undoManager?.registerUndo(withTarget: content) { [weak self] in
                 self?.updateAlbum(for: $0, oldAlbum)
+            }
+        } catch {
+            logger.error(error)
+        }
+    }
+
+    func updateTrack(for content: Mp3File, _ newValue: String?) {
+        do {
+            let oldTrack = content.trackPositionString
+            content.trackPositionString = newValue
+            try content.save()
+            parent.undoManager?.registerUndo(withTarget: content) { [weak self] in
+                self?.updateTrack(for: $0, oldTrack)
             }
         } catch {
             logger.error(error)

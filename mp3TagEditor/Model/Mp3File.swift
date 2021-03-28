@@ -262,6 +262,33 @@ extension Mp3File {
 }
 
 extension Mp3File {
+    var trackPositionString: String? {
+        get {
+            guard let trackPosition = trackPosition else { return nil }
+            return String {
+                String(trackPosition.part)
+                if let total = trackPosition.total {
+                    "/\(total)"
+                }
+            }
+        }
+        set {
+            let regex = try! NSRegularExpression(pattern: #"^(?<part>[0-9]+)(/(?<total>[0-9]+))?$"#)
+            guard let newValue = newValue else {
+                trackPosition = nil
+                return
+            }
+            guard let result = regex.firstMatch(in: newValue, range: .init(location: 0, length: newValue.count)) else { return }
+            guard let part = Range(result.range(withName: "part"), in: newValue)
+                    .flatMap({ Int(newValue[$0]) }) else { return }
+            let total = Range(result.range(withName: "total"), in: newValue)
+                .flatMap { Int(newValue[$0]) }
+            trackPosition = .init(part: part, total: total)
+        }
+    }
+}
+
+extension Mp3File {
     func comment(_ language: ID3FrameContentLanguage) -> String? {
         (id3Tag?.frames[.comment(language)] as? ID3FrameWithStringContent)?.content
     }
