@@ -24,6 +24,7 @@ struct Mp3TagEditorApp: App {
                           !fileListStore.isConverting else { return }
                     fileListStore.isConverting.toggle()
                 }
+                .keyboardShortcut(KeyEquivalent("c"), modifiers: .option)
                 // FIXME: not updated when any files selected
                 //.disabled(fileListStore.selectedFiles.isEmpty)
             }
