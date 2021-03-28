@@ -12,7 +12,12 @@ struct RenamedFileRowView: View {
     @Binding var format: String
 
     var body: some View {
-        Text(mp3File.filename(withFormat: format))
+        HStack {
+            Text(mp3File.filePath?.lastPathComponent ?? "")
+            Text("→")
+            Text("\(mp3File.filename(withFormat: format))")
+        }
+        .padding(.horizontal)
     }
 }
 
@@ -21,8 +26,12 @@ struct FileRenamedRowView_Previews: PreviewProvider {
     static var previews: some View {
         RenamedFileRowView(
             mp3File: Mp3File.samples[0],
-            format: .constant("\(FileFormat.trackNumberZeroPadding.rawValue) \(FileFormat.title.rawValue)")
-        )
+            format: .constant("$num(\(FileFormat.track.rawValue), 2) \(FileFormat.title.rawValue)")
+        ).preferredColorScheme(.light)
+        RenamedFileRowView(
+            mp3File: Mp3File.samples[0],
+            format: .constant("$num(\(FileFormat.track.rawValue), 2) \(FileFormat.title.rawValue)")
+        ).preferredColorScheme(.dark)
     }
 }
 #endif

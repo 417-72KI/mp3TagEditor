@@ -16,4 +16,12 @@ extension String {
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .capitalized
     }
+
+    var lastPathComponent: String {
+        (self as NSString).lastPathComponent
+    }
+
+    var pathExtension: String  {
+        (self as NSString).pathExtension
+    }
 }

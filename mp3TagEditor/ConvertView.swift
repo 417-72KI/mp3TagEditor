@@ -10,7 +10,8 @@ import SwiftUI
 struct ConvertView: View {
     var convertList: [Mp3File]
     @Binding var isPresented: Bool
-    @State var format: String = "\(FileFormat.trackNumberZeroPadding.rawValue) \(FileFormat.title.rawValue)"
+    @State var format: String = "$num(\(FileFormat.track.rawValue), 2) \(FileFormat.title.rawValue)"
+    @State var formatHelpPresented = false
 
     var body: some View {
         VStack {
@@ -18,18 +19,39 @@ struct ConvertView: View {
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 .bold()
                 .padding(.vertical, 10)
-            TextField("Format", text: $format)
+            HStack {
+                Text("Format:")
+                TextField("", text: $format)
+                HelpButton {
+                    formatHelpPresented.toggle()
+                }.popover(isPresented: $formatHelpPresented) {
+                    FormatHelpView()
+                }
+            }
             ForEach(convertList) {
                 RenamedFileRowView(mp3File: $0, format: $format)
             }
             HStack {
                 Button("OK") {
+                    convert()
                     isPresented = false
                 }
+                Spacer()
+                    .frame(width: 8)
                 Button("Cancel") {
                     isPresented = false
                 }
-            }.padding(8)
+            }
+            .frame(alignment: .center)
+        }
+        .padding(8)
+    }
+}
+
+private extension ConvertView {
+    func convert() {
+        convertList.forEach { file in
+            logger.debug(file.filename(withFormat: format))
         }
     }
 }
@@ -40,7 +62,11 @@ struct ConvertView_Previews: PreviewProvider {
         ConvertView(
             convertList: Mp3File.samples,
             isPresented: .constant(false)
-        )
+        ).preferredColorScheme(.light)
+        ConvertView(
+            convertList: Mp3File.samples,
+            isPresented: .constant(false)
+        ).preferredColorScheme(.dark)
     }
 }
 #endif
