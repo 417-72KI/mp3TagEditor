@@ -79,6 +79,9 @@ private extension ContentView {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(fileListStore: .init())
+        ForEach(ColorScheme.allCases, id: \.hashValue) {
+            ContentView(fileListStore: .init())
+                .preferredColorScheme($0)
+        }
     }
 }

@@ -24,14 +24,12 @@ struct RenamedFileRowView: View {
 #if DEBUG
 struct FileRenamedRowView_Previews: PreviewProvider {
     static var previews: some View {
-        RenamedFileRowView(
-            mp3File: Mp3File.samples[0],
-            format: .constant("$num(\(FileFormat.track.rawValue), 2) \(FileFormat.title.rawValue)")
-        ).preferredColorScheme(.light)
-        RenamedFileRowView(
-            mp3File: Mp3File.samples[0],
-            format: .constant("$num(\(FileFormat.track.rawValue), 2) \(FileFormat.title.rawValue)")
-        ).preferredColorScheme(.dark)
+        ForEach(ColorScheme.allCases, id: \.hashValue) {
+            RenamedFileRowView(
+                mp3File: Mp3File.samples[0],
+                format: .constant("$num(\(FileFormat.track.rawValue), 2) \(FileFormat.title.rawValue)")
+            ).preferredColorScheme($0)
+        }
     }
 }
 #endif

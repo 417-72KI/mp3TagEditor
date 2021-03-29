@@ -59,14 +59,12 @@ private extension ConvertView {
 #if DEBUG
 struct ConvertView_Previews: PreviewProvider {
     static var previews: some View {
-        ConvertView(
-            convertList: Mp3File.samples,
-            isPresented: .constant(false)
-        ).preferredColorScheme(.light)
-        ConvertView(
-            convertList: Mp3File.samples,
-            isPresented: .constant(false)
-        ).preferredColorScheme(.dark)
+        ForEach(ColorScheme.allCases, id: \.hashValue) {
+            ConvertView(
+                convertList: Mp3File.samples,
+                isPresented: .constant(false)
+            ).preferredColorScheme($0)
+        }
     }
 }
 #endif

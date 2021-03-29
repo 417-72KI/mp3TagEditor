@@ -19,6 +19,9 @@ struct FormatHelpView: View {
 
 struct FormatHelpView_Previews: PreviewProvider {
     static var previews: some View {
-        FormatHelpView()
+        ForEach(ColorScheme.allCases, id: \.hashValue) {
+            FormatHelpView()
+                .preferredColorScheme($0)
+        }
     }
 }

@@ -84,7 +84,10 @@ struct Mp3TagView: View {
 
 struct Mp3TagView_Previews: PreviewProvider {
     static var previews: some View {
-        Mp3TagView(mp3Files: [])
+        ForEach(ColorScheme.allCases, id: \.hashValue) {
+            Mp3TagView(mp3Files: [])
+                .preferredColorScheme($0)
+        }
     }
 }
 

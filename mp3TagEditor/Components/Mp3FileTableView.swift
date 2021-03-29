@@ -278,7 +278,10 @@ extension Mp3FileTableView.Coordinator: NSTableViewDelegate {
 // MARK: - Preview
 struct Mp3FileTableView_Previews: PreviewProvider {
     static var previews: some View {
-        Mp3FileTableView(contents: .constant([]),
-                         selectedIndicies: .constant([]))
+        ForEach(ColorScheme.allCases, id: \.hashValue) {
+            Mp3FileTableView(contents: .constant([]),
+                             selectedIndicies: .constant([]))
+                .preferredColorScheme($0)
+        }
     }
 }

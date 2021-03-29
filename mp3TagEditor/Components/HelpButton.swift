@@ -28,13 +28,10 @@ struct HelpButton: View {
 
 struct HelpButton_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
+        ForEach(ColorScheme.allCases, id: \.hashValue) {
             HelpButton(action: {})
                 .padding()
-                .preferredColorScheme(.light)
-            HelpButton(action: {})
-                .padding()
-                .preferredColorScheme(.dark)
+                .preferredColorScheme($0)
         }
     }
 }

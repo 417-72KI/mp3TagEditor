@@ -22,9 +22,12 @@ struct ModifiableTextField: View {
 
 struct ModifiableTextField_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            ModifiableTextField(text: .constant("hoge"), modified: true)
-            ModifiableTextField(text: .constant("hoge"), modified: false)
+        ForEach(ColorScheme.allCases, id: \.hashValue) {
+            Group {
+                ModifiableTextField(text: .constant("hoge"), modified: true)
+                ModifiableTextField(text: .constant("hoge"), modified: false)
+            }
+            .preferredColorScheme($0)
         }
     }
 }
