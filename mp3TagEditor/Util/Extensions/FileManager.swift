@@ -13,4 +13,11 @@ extension FileManager {
         guard fileExists(atPath: path, isDirectory: &isDirectory) else { return false }
         return isDirectory.boolValue
     }
+
+    func rename(atPath path: String, to newFileName: String) throws {
+        guard fileExists(atPath: path) else { return }
+        let directory = path.deletingLastPathComponent
+        let newFilePath = directory.appendingPathComponent(newFileName)
+        try moveItem(atPath: path, toPath: newFilePath)
+    }
 }

@@ -17,11 +17,21 @@ extension String {
             .capitalized
     }
 
+    var deletingLastPathComponent: String {
+        (self as NSString).deletingLastPathComponent
+    }
+
     var lastPathComponent: String {
         (self as NSString).lastPathComponent
     }
 
     var pathExtension: String  {
         (self as NSString).pathExtension
+    }
+}
+
+extension String {
+    func appendingPathComponent(_ str: String) -> String {
+        (self as NSString).appendingPathComponent(str)
     }
 }

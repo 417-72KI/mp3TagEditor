@@ -28,8 +28,10 @@ struct ConvertView: View {
                     FormatHelpView()
                 }
             }
-            ForEach(convertList) {
-                RenamedFileRowView(mp3File: $0, format: $format)
+            ScrollView {
+                ForEach(convertList) {
+                    RenamedFileRowView(mp3File: $0, format: $format)
+                }
             }
             HStack {
                 Button("OK") {
@@ -50,8 +52,16 @@ struct ConvertView: View {
 
 private extension ConvertView {
     func convert() {
+        let fm = FileManager.default
         convertList.forEach { file in
-            logger.debug(file.filename(withFormat: format))
+            guard let filePath = file.filePath,
+                  fm.fileExists(atPath: filePath) else { return }
+            let newFileName = file.filename(withFormat: format)
+            do {
+                try fm.rename(atPath: filePath, to: newFileName)
+            } catch {
+                logger.error(error)
+            }
         }
     }
 }
