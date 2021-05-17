@@ -7,13 +7,13 @@
 
 import Foundation
 
-@_functionBuilder
+@resultBuilder
 struct StringBuilder {
     static func buildBlock(_ strings: String...) -> String {
         strings.joined()
     }
 
-    static func buildIf(_ string: String?) -> String {
+    static func buildOptional(_ string: String?) -> String {
         string ?? ""
     }
 }
