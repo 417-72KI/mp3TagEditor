@@ -292,7 +292,14 @@ extension Mp3File {
     func comment(_ language: ID3FrameContentLanguage) -> String? {
         (id3Tag?.frames[.comment(language)] as? ID3FrameWithStringContent)?.content
     }
+    func setComment(_ value: String?, for language: ID3FrameContentLanguage) {
+        guard value != comment(language) else { return }
+        id3Tag?.frames[.comment(language)] = value.flatMap(ID3FrameWithStringContent.init)
+        isModified = true
+    }
+}
 
+extension Mp3File {
     func thumbnail(_ pictureType: ID3PictureType) -> ID3FrameAttachedPicture? {
         id3Tag?.frames[.attachedPicture(pictureType)] as? ID3FrameAttachedPicture
     }
@@ -304,7 +311,9 @@ extension Mp3File {
             .map { ($0, comment($0)) }
             .reduce(into: [:]) { $0[$1.0] = $1.1 }
     }
+}
 
+extension Mp3File {
     var thumbnails: [ID3PictureType: ID3FrameAttachedPicture] {
         ID3PictureType.allCases
             .map { ($0, thumbnail($0)) }

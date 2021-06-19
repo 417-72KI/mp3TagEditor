@@ -130,6 +130,8 @@ private extension Mp3TagView {
                 trackTotal: singleOrMultipleValues(keyPath: \.trackTotal),
                 genre: singleOrMultipleValues(keyPath: \.genre),
                 comment: {
+                    logger.debug(mp3Files.singleOrMultipleValues(\.comments))
+
                     switch mp3Files.singleOrMultipleValues({ $0.comment(.eng) }) {
                     case let .singleValue(value):
                         return value.flatMap { "\($0)" } ?? ""
