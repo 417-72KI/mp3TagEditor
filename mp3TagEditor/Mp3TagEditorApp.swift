@@ -28,6 +28,20 @@ struct Mp3TagEditorApp: App {
                 // FIXME: not updated when any files selected
                 //.disabled(fileListStore.selectedFiles.isEmpty)
             }
+            CommandGroup(after: .pasteboard) {
+                Button("Make the track numbers serial") {
+                    let files = fileListStore.sortedSelectedFiles
+                    guard !files.isEmpty else { return }
+                    files.enumerated().forEach { index, file in
+                        file.trackPart = (index + 1)
+                        do {
+                            try file.save()
+                        } catch {
+                            logger.error(error)
+                        }
+                    }
+                }
+            }
         }
     }
 }

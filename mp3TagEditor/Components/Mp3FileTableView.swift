@@ -15,7 +15,7 @@ struct Mp3FileTableView: NSViewRepresentable {
 
     @Binding var contents: [Mp3File]
     @Binding var selectedIndicies: [Int]
-    @State private var sortingKey: (PartialKeyPath<Mp3File>, Bool)?
+    @Binding var sortingKey: (keyPath: PartialKeyPath<Mp3File>, ascending: Bool)?
 
     func makeNSView(context: Context) -> NSScrollView {
         NSScrollView().apply {
@@ -93,7 +93,7 @@ extension Mp3FileTableView {
     final class Coordinator: NSObject {
         var parent: Mp3FileTableView
         var contents: [Mp3File] = []
-        var sortingKey: (PartialKeyPath<Mp3File>, Bool)?
+        var sortingKey: (keyPath: PartialKeyPath<Mp3File>, ascending: Bool)?
 
         init(_ parent: Mp3FileTableView) {
             self.parent = parent
@@ -104,11 +104,11 @@ extension Mp3FileTableView {
 private extension Mp3FileTableView.Coordinator {
     var sortedContents: [Mp3File] {
         guard let sortingKey = sortingKey else { return contents }
-        switch sortingKey.0 {
+        switch sortingKey.keyPath {
         case let stringKeyPath as KeyPath<Mp3File, String?>:
-            return contents.sorted(by: stringKeyPath, ascending: sortingKey.1)
+            return contents.sorted(by: stringKeyPath, ascending: sortingKey.ascending)
         case let intKeyPath as KeyPath<Mp3File, Int?>:
-            return contents.sorted(by: intKeyPath, ascending: sortingKey.1)
+            return contents.sorted(by: intKeyPath, ascending: sortingKey.ascending)
         default:
             return contents
         }
@@ -280,7 +280,8 @@ struct Mp3FileTableView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.hashValue) {
             Mp3FileTableView(contents: .constant([]),
-                             selectedIndicies: .constant([]))
+                             selectedIndicies: .constant([]),
+                             sortingKey: .constant(nil))
                 .preferredColorScheme($0)
         }
     }
