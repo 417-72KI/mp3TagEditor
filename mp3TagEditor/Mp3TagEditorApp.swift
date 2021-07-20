@@ -32,7 +32,14 @@ struct Mp3TagEditorApp: App {
                 Button("Make the track numbers serial") {
                     let files = fileListStore.sortedSelectedFiles
                     guard !files.isEmpty else { return }
-                    print(files.map(\.title))
+                    files.enumerated().forEach { index, file in
+                        file.trackPart = (index + 1)
+                        do {
+                            try file.save()
+                        } catch {
+                            logger.error(error)
+                        }
+                    }
                 }
             }
         }
