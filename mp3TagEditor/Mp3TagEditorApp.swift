@@ -27,6 +27,18 @@ struct Mp3TagEditorApp: App {
                 .keyboardShortcut(KeyEquivalent("c"), modifiers: .option)
                 // FIXME: not updated when any files selected
                 //.disabled(fileListStore.selectedFiles.isEmpty)
+                Button("Clear unknown comment") {
+                    let selectedFiles = fileListStore.selectedFiles
+                    guard !selectedFiles.isEmpty else { return }
+                    selectedFiles.forEach {
+                        $0.setComment(nil, for: .unknown)
+                        do {
+                            try $0.save()
+                        } catch {
+                            logger.error(error)
+                        }
+                    }
+                }
             }
             CommandGroup(after: .pasteboard) {
                 Button("Make the track numbers serial") {
