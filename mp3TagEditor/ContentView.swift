@@ -14,15 +14,22 @@ struct ContentView: View {
     var body: some View {
         HStack(alignment: .top) {
             Mp3TagView(mp3Files: fileListStore.selectedFiles)
-            Mp3FileTableView(contents: $fileListStore.files,
-                             selectedIndicies: $fileListStore.selectedIndicies)
-                .onDeleteCommand {
-                    logger.debug(fileListStore.selectedIndicies)
-                    fileListStore.files
-                        .remove(atOffsets: IndexSet(fileListStore.selectedIndicies))
-                    fileListStore.selectedIndicies = []
+            VStack {
+                Mp3FileTableView(contents: $fileListStore.files,
+                                 selectedIndicies: $fileListStore.selectedIndicies)
+                    .onDeleteCommand {
+                        logger.debug(fileListStore.selectedIndicies)
+                        fileListStore.files
+                            .remove(atOffsets: IndexSet(fileListStore.selectedIndicies))
+                        fileListStore.selectedIndicies = []
+                    }
+                    .frame(minWidth: 320)
+                HStack {
+                    Spacer()
+                    Button("リストをクリア") { fileListStore.clear() }
                 }
-                .frame(minWidth: 320)
+                .padding(8)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onDrop(of: [kUTTypeFileURL as String],

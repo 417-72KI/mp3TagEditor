@@ -18,3 +18,10 @@ extension FileListStore {
         selectedIndicies.map { files[$0] }
     }
 }
+
+extension FileListStore {
+    func clear() {
+        selectedIndicies = []
+        files = []
+    }
+}
