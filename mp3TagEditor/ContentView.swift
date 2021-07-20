@@ -16,7 +16,8 @@ struct ContentView: View {
             Mp3TagView(mp3Files: fileListStore.selectedFiles)
             VStack {
                 Mp3FileTableView(contents: $fileListStore.files,
-                                 selectedIndicies: $fileListStore.selectedIndicies)
+                                 selectedIndicies: $fileListStore.selectedIndicies,
+                                 sortingKey: $fileListStore.sortingKey)
                     .onDeleteCommand {
                         logger.debug(fileListStore.selectedIndicies)
                         fileListStore.files
