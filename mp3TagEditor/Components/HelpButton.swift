@@ -19,7 +19,7 @@ struct HelpButton: View {
                     .background(Circle().foregroundColor(Color(NSColor.controlColor)))
                     .shadow(color: Color(NSColor.separatorColor).opacity(0.3), radius: 1)
                     .frame(width: 20, height: 20)
-                Text("?").font(.system(size: 15, weight: .medium ))
+                Text("?").font(.system(size: 15, weight: .medium))
             }
         })
         .buttonStyle(PlainButtonStyle())
