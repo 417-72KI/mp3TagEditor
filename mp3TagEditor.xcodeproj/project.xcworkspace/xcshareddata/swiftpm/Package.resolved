@@ -1,25 +1,23 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "ID3TagEditor",
-        "repositoryURL": "https://github.com/chicio/ID3TagEditor",
-        "state": {
-          "branch": null,
-          "revision": "48cfd035120bb08ec3763b19e379cde049929f82",
-          "version": "4.1.1"
-        }
-      },
-      {
-        "package": "XCGLogger",
-        "repositoryURL": "https://github.com/DaveWoodCom/XCGLogger.git",
-        "state": {
-          "branch": null,
-          "revision": "a9c4667b247928a29bdd41be2ec2c8d304215a54",
-          "version": "7.0.1"
-        }
+  "pins" : [
+    {
+      "identity" : "id3tageditor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/chicio/ID3TagEditor",
+      "state" : {
+        "revision" : "87242fcb531e31eb7a94ec363c9631fe4e510ebb",
+        "version" : "4.5.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "xcglogger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DaveWoodCom/XCGLogger.git",
+      "state" : {
+        "revision" : "a9c4667b247928a29bdd41be2ec2c8d304215a54",
+        "version" : "7.0.1"
+      }
+    }
+  ],
+  "version" : 2
 }
