@@ -23,7 +23,7 @@ build: xcproj
 		-project 'mp3TagEditor.xcodeproj' \
 		-scheme 'mp3TagEditor' \
 		-configuration Debug \
-		-destination 'platform=macOS,arch=x86_64' \
+		-destination 'platform=macOS' \
 		-clonedSourcePackagesDirPath .build \
 		-derivedDataPath ${DERIVED_DATA_PATH} \
 		| xcpretty
