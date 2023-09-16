@@ -16,10 +16,23 @@ settings:
     debug:
       DEBUG_INFORMATION_FORMAT: "dwarf-with-dsym"
 
+schemes:
+  mp3TagEditor:
+    build:
+      targets:
+        mp3TagEditor: all
+        mp3TagEditorTests: [test]
+        mp3TagEditorUITests: [test]
+    test:
+      targets:
+        - mp3TagEditorTests
+        - mp3TagEditorUITests
+      gatherCoverageData: true
+
 packages:
   ID3TagEditor:
     url: https://github.com/chicio/ID3TagEditor
-    from: 4.1.1
+    from: 4.5.0
   XCGLogger: 
     url: https://github.com/DaveWoodCom/XCGLogger.git
     from: 7.0.1
