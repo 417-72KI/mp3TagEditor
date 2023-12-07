@@ -29,4 +29,9 @@ build: xcproj
 		| xcpretty
 
 clean: xcproj
-	xcrun xcodebuild -configuration Debug clean | xcpretty
+	xcrun xcodebuild \
+	-project 'mp3TagEditor.xcodeproj' \
+	-scheme 'mp3TagEditor' \
+	-configuration Debug \
+	-clonedSourcePackagesDirPath .build \
+	clean | xcpretty
