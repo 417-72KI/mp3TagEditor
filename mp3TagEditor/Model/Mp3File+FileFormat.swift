@@ -38,7 +38,8 @@ extension Mp3File {
             default:
                 return str
             }
-        }
+        }.replacingOccurrences(of: "/", with: "／")
+            .replacingOccurrences(of: "\"", with: "_")
     }
 
     var pathExtension: String {
