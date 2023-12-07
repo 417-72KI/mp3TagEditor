@@ -66,7 +66,9 @@ targets:
       path: mp3TagEditor/Resources/mp3TagEditor.entitlements
       properties:
         com.apple.security.app-sandbox: true
-        com.apple.security.files.user-selected.read-only: true
+        com.apple.security.assets.music.read-write: true
+        com.apple.security.files.downloads.read-write: true
+        com.apple.security.files.user-selected.read-write: true
     configs:
       Debug:
         OTHER_SWIFT_FLAGS: $(inherited) -Xfrontend -warn-long-expression-type-checking=500 -Xfrontend -warn-long-function-bodies=500
