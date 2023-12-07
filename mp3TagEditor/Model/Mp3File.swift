@@ -40,6 +40,11 @@ extension Mp3File {
 }
 
 extension Mp3File {
+    func rename(_ newPath: String) throws {
+        self.source = .path(newPath)
+        try reload()
+    }
+
     func reload() throws {
         guard case let .path(path) = source else { return }
         id3Tag = try ID3TagEditor().read(from: path)

@@ -58,7 +58,8 @@ private extension ConvertView {
                   fm.fileExists(atPath: filePath) else { return }
             let newFileName = file.filename(withFormat: format)
             do {
-                try fm.rename(atPath: filePath, to: newFileName)
+                let newFilePath = try fm.rename(atPath: filePath, to: newFileName)
+                try file.rename(newFilePath)
             } catch {
                 logger.error(error)
             }
