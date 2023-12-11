@@ -60,6 +60,8 @@ private extension ConvertView {
             do {
                 let newFilePath = try fm.rename(atPath: filePath, to: newFileName)
                 try file.rename(newFilePath)
+            } catch let FileManager.Error.unmodifiedFileName(path) {
+                logger.error("File name not modified: \(path)")
             } catch {
                 logger.error(error)
             }
