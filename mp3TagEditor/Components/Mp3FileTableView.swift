@@ -105,6 +105,20 @@ private extension Mp3FileTableView.Coordinator {
     var sortedContents: [Mp3File] {
         guard let sortingKey = sortingKey else { return contents }
         switch sortingKey.keyPath {
+        case \.album:
+            return contents.sorted {
+                guard let l = $0.album,
+                      let r = $1.album else { return false }
+                return if l == r {
+                    $0.trackPart ?? 0 < $1.trackPart ?? 0
+                } else {
+                    if sortingKey.ascending {
+                        l < r
+                    } else {
+                        l > r
+                    }
+                }
+            }
         case let stringKeyPath as KeyPath<Mp3File, String?>:
             return contents.sorted(by: stringKeyPath, ascending: sortingKey.ascending)
         case let intKeyPath as KeyPath<Mp3File, Int?>:

@@ -15,7 +15,7 @@ extension Sequence {
     public func sorted<T: Comparable>(by keyPath: KeyPath<Element, T?>, ascending: Bool = true) -> [Element] {
         sorted {
             guard let l = $0[keyPath: keyPath],
-                let r = $1[keyPath: keyPath] else { return false }
+                  let r = $1[keyPath: keyPath] else { return false }
             return ascending ? l < r : l > r
         }
     }
@@ -29,7 +29,7 @@ extension Array {
     public mutating func sort<T: Comparable>(by keyPath: KeyPath<Element, T?>, ascending: Bool = true) {
         sort {
             guard let l = $0[keyPath: keyPath],
-                let r = $1[keyPath: keyPath] else { return false }
+                  let r = $1[keyPath: keyPath] else { return false }
             return ascending ? l < r : l > r
         }
     }
