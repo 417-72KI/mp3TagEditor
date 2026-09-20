@@ -55,6 +55,8 @@ jobs:
             -clonedSourcePackagesDirPath SourcePackages \
             -derivedDataPath build \
             -resultBundlePath test_output/mp3TagEditor.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY=\"-\" \
             test
       - name: Upload test results
         if: success() || failure()
