@@ -26,7 +26,7 @@ jobs:
       - name: Set up XcodeGen
         run: |
           git clone --depth 1 --branch "$(cat Mintfile | grep 'yonaskolb/xcodegen' | awk -F '@' '{print $2}')" https://github.com/yonaskolb/XcodeGen.git
-          make -C XcodeGen install
+          (cd XcodeGen && make install)
       - name: Run XcodeGen
         run: xcodegen generate --use-cache --quiet
       - name: Test
