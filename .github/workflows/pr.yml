@@ -45,7 +45,7 @@ jobs:
             -clonedSourcePackagesDirPath SourcePackages \
             -derivedDataPath build \
             -resultBundlePath test_output/mp3TagEditor.xcresult \
-            test | xcbeautify
+            test
       - name: Upload test results
         if: success() || failure()
         uses: actions/upload-artifact@v4
