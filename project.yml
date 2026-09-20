@@ -3,9 +3,9 @@ name: mp3TagEditor
 options:
   bundleIdPrefix: jp.room417
   deploymentTarget:
-    macOS: 11.0
+    macOS: 26.0
   developmentLanguage: ja
-  xcodeVersion: "12.3"
+  xcodeVersion: "27.0"
 
 settings:
   base:
