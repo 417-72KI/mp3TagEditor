@@ -18,7 +18,7 @@ jobs:
           cache-name: swiftpm
         with:
           path: SourcePackages
-          key: ${{ runner.os }}-${{ github.job }}-${{ matrix.xcode_version }}-${{ env.cache-name }}-${{ hashFiles('**/Package.swift') }}
+          key: ${{ runner.os }}-${{ github.job }}-${{ matrix.xcode_version }}-${{ env.cache-name }}-${{ hashFiles('**/Package.swift') }}-${{ hashFiles('**/project.yml') }}
           restore-keys: |
             ${{ runner.os }}-${{ github.job }}-${{ matrix.xcode_version }}-${{ env.cache-name }}-
             ${{ runner.os }}-${{ github.job }}-${{ matrix.xcode_version }}-
