@@ -26,7 +26,7 @@ build: xcproj
 		-destination 'platform=macOS' \
 		-clonedSourcePackagesDirPath .build \
 		-derivedDataPath ${DERIVED_DATA_PATH} \
-		| xcpretty
+		| xcbeautify
 
 clean: xcproj
 	xcrun xcodebuild \
@@ -34,4 +34,4 @@ clean: xcproj
 	-scheme 'mp3TagEditor' \
 	-configuration Debug \
 	-clonedSourcePackagesDirPath .build \
-	clean | xcpretty
+	clean | xcbeautify
