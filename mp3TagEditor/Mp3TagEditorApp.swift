@@ -19,6 +19,19 @@ struct Mp3TagEditorApp: App {
         }.commands {
             CommandGroup(replacing: .newItem) { }
             CommandGroup(before: .newItem) {
+                Button("Save") {
+                    guard !fileListStore.selectedFiles.isEmpty else { return }
+                    fileListStore.selectedFiles.forEach {
+                        do {
+                            try $0.save(force: true)
+                        } catch {
+                            logger.error(error)
+                        }
+                    }
+                }
+                .keyboardShortcut(KeyEquivalent("s"), modifiers: .command)
+            }
+            CommandGroup(before: .newItem) {
                 Button("Convert tag to file name") {
                     guard !fileListStore.selectedFiles.isEmpty,
                           !fileListStore.isConverting else { return }

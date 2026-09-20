@@ -51,8 +51,10 @@ extension Mp3File {
         isModified = false
     }
 
-    func save() throws {
-        guard isModified else { return }
+    func save(force: Bool = false) throws {
+        if !force {
+            guard isModified else { return }
+        }
         defer { isModified = false }
 
         guard let id3Tag = id3Tag else { return }
@@ -340,19 +342,19 @@ extension Mp3File: Equatable {
     }
 }
 
-extension RecordingDateTime: Equatable {
+extension RecordingDateTime: @retroactive Equatable {
     public static func == (lhs: RecordingDateTime, rhs: RecordingDateTime) -> Bool {
         lhs.date == rhs.date && lhs.time == rhs.time
     }
 }
 
-extension RecordingDate: Equatable {
+extension RecordingDate: @retroactive Equatable {
     public static func == (lhs: RecordingDate, rhs: RecordingDate) -> Bool {
         lhs.year == rhs.year && lhs.month == rhs.month && lhs.day == rhs.day
     }
 }
 
-extension RecordingTime: Equatable {
+extension RecordingTime: @retroactive Equatable {
     public static func == (lhs: RecordingTime, rhs: RecordingTime) -> Bool {
         lhs.hour == rhs.hour && lhs.minute == rhs.minute
     }
