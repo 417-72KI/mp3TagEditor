@@ -23,10 +23,21 @@ jobs:
             ${{ runner.os }}-${{ github.job }}-${{ env.cache-name }}-
             ${{ runner.os }}-${{ github.job }}-
             ${{ runner.os }}-
+      - name: Cache XcodeGen
+        uses: actions/cache@v4
+        env:
+          cache-name: xcodegen
+        with:
+          path: ~/.xcodegen
+          key: ${{ runner.os }}-${{ github.job }}-${{ env.cache-name }}-${{ hashFiles('**/Mintfile') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ github.job }}-${{ env.cache-name }}-
+            ${{ runner.os }}-${{ github.job }}-
+            ${{ runner.os }}-
       - name: Set up XcodeGen
         run: |
-          git clone --depth 1 --branch "$(cat Mintfile | grep 'yonaskolb/xcodegen' | awk -F '@' '{print $2}')" https://github.com/yonaskolb/XcodeGen.git
-          (cd XcodeGen && make install)
+          git clone --depth 1 --branch "$(cat Mintfile | grep 'yonaskolb/xcodegen' | awk -F '@' '{print $2}')" https://github.com/yonaskolb/XcodeGen.git ~/.xcodegen
+          (cd ~/.xcodegen && make install)
       - name: Run XcodeGen
         run: xcodegen generate --use-cache --quiet
       - name: Test
