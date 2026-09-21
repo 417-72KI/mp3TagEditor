@@ -35,7 +35,7 @@ packages:
     from: 4.5.0
   XCGLogger: 
     url: https://github.com/DaveWoodCom/XCGLogger.git
-    from: 7.0.1
+    from: 7.1.5
 
 targets:
   mp3TagEditor:
