@@ -1,0 +1,66 @@
+name: PR
+on:
+  pull_request:
+concurrency:
+  group: ${{ github.head_ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+jobs:
+  test:
+    name: Test
+    runs-on: macOS-26
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v7
+      - name: Cache SPM build directory
+        uses: actions/cache@v4
+        env:
+          cache-name: swiftpm
+        with:
+          path: SourcePackages
+          key: ${{ runner.os }}-${{ github.job }}-${{ env.cache-name }}-${{ hashFiles('**/Package.swift') }}-${{ hashFiles('**/project.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ github.job }}-${{ env.cache-name }}-
+            ${{ runner.os }}-${{ github.job }}-
+            ${{ runner.os }}-
+      - name: Cache XcodeGen
+        uses: actions/cache@v4
+        env:
+          cache-name: xcodegen
+        with:
+          path: ~/.xcodegen
+          key: ${{ runner.os }}-${{ github.job }}-${{ env.cache-name }}-${{ hashFiles('**/Mintfile') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ github.job }}-${{ env.cache-name }}-
+            ${{ runner.os }}-${{ github.job }}-
+            ${{ runner.os }}-
+      - name: Set up XcodeGen
+        run: |
+          git clone --depth 1 --branch "$(cat Mintfile | grep 'yonaskolb/xcodegen' | awk -F '@' '{print $2}')" https://github.com/yonaskolb/XcodeGen.git ~/.xcodegen
+          (cd ~/.xcodegen && make install)
+      - name: Run XcodeGen
+        run: xcodegen generate --use-cache --quiet
+      - name: Test
+        run: |
+          xcrun xcodebuild \
+            -resolvePackageDependencies \
+            -project 'mp3TagEditor.xcodeproj' \
+            -scheme 'mp3TagEditor' \
+            -clonedSourcePackagesDirPath SourcePackages
+          xcrun xcodebuild \
+            -project 'mp3TagEditor.xcodeproj' \
+            -scheme 'mp3TagEditor' \
+            -configuration Debug \
+            -destination 'platform=macOS' \
+            -clonedSourcePackagesDirPath SourcePackages \
+            -derivedDataPath build \
+            -resultBundlePath test_output/mp3TagEditor.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY=\"-\" \
+            test
+      - name: Upload test results
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mp3TagEditor.xcresult
+          path: test_output/mp3TagEditor.xcresult

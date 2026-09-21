@@ -35,3 +35,13 @@ clean: xcproj
 	-configuration Debug \
 	-clonedSourcePackagesDirPath .build \
 	clean | xcbeautify
+
+test: xcproj
+	xcrun xcodebuild \
+		-project 'mp3TagEditor.xcodeproj' \
+		-scheme 'mp3TagEditor' \
+		-configuration Debug \
+		-destination 'platform=macOS' \
+		-clonedSourcePackagesDirPath .build \
+		-derivedDataPath ${DERIVED_DATA_PATH} \
+		test | xcbeautify
