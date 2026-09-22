@@ -1,12 +1,13 @@
 {
+  "originHash" : "cce133598e827e2143d53067156347301047f29027c89d2b91dafd2c43eaee1c",
   "pins" : [
     {
       "identity" : "id3tageditor",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/chicio/ID3TagEditor",
       "state" : {
-        "revision" : "87242fcb531e31eb7a94ec363c9631fe4e510ebb",
-        "version" : "4.5.0"
+        "revision" : "3ccc31eafae0ded1fea8c9acd5e7ef7dfdbf1e8e",
+        "version" : "4.6.0"
       }
     },
     {
@@ -14,10 +15,10 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/DaveWoodCom/XCGLogger.git",
       "state" : {
-        "revision" : "a9c4667b247928a29bdd41be2ec2c8d304215a54",
-        "version" : "7.0.1"
+        "revision" : "4def3c1c772ca90ad5e7bfc8ac437c3b0b4276cf",
+        "version" : "7.1.5"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
