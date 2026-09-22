@@ -7,45 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09C2754A67577CE389471C81 /* Mp3File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A3ADD3784FA875683F0AC6 /* Mp3File.swift */; };
-		0EB63F79B30133F44BD5039B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A698E4DA9DF6170F82A7FA /* Logger.swift */; };
-		0FD2598A97478AF405BE502C /* Cover_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63D3A7571FCC9FE69BD3EDC9 /* Cover_01.jpg */; };
 		1E64E3D5202AD92934B43830 /* ID3TagEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 4F080FD604ED19A508CBFBD0 /* ID3TagEditor */; };
 		23888D7205388853F015B487 /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 2C4212C85BAB822A955FF67E /* XCGLogger */; };
-		23BF57D79E541FC450D654CD /* FileListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB032C4549377927CB03CE6D /* FileListStore.swift */; };
-		2F0A4FFD51069BE511E20537 /* Cover_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EC61D880648D59A5E41B8AF /* Cover_02.jpg */; };
-		409A709DF05D2BBCAABEDF38 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C3D97229E4AF984D2BE3CD /* Sequence.swift */; };
-		42F8AB618B893F5313F235C1 /* 02. Life is サイダー.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA1C16EC638E6C4DC4A14C30 /* 02. Life is サイダー.mp3 */; };
-		4552AB9A820303EB23B486B7 /* SampleMp3Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8ADFB5A61217E8B38524796 /* SampleMp3Files.swift */; };
-		4A255B749E6959FA5306C13A /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF4BA1358EE970AAC1BC5DE /* Array.swift */; };
-		52BFA9E570057CE4C6C4815F /* FormatHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FA9A5FB4BDF80C6F7EA9AE /* FormatHelpView.swift */; };
-		581F6818A2663A09BCAC6417 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0798552BD613535BEFAABE0 /* ContentView.swift */; };
-		5D8F2B5E616439AAE3CFCC0C /* Applicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CCCE541CEDA2BC63812279 /* Applicable.swift */; };
-		5E7BEBE4C44B393639BA7FD2 /* 04. 巣立ちの歌 -大戸アイ ソロver.-.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1733F5FC8AAB775E614FB675 /* 04. 巣立ちの歌 -大戸アイ ソロver.-.mp3 */; };
-		6ECCC311CA030E1E2F188FED /* 09. Life is サイダー -TV Size-.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1BC40DCBAB97233D082DE6A5 /* 09. Life is サイダー -TV Size-.mp3 */; };
-		70D36772CEE93B88F6E1F473 /* FileFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0736C67AB98EA0B368FCA3 /* FileFormat.swift */; };
-		74EAAB954010C3582D7C6BC0 /* HelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689C557F574425C3940648D6 /* HelpButton.swift */; };
-		7945E672C2B4AAED8092F8C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146808E3BE735F7550A4D386 /* AppDelegate.swift */; };
-		82AE01A419AECDF9644C679D /* RenamedFileRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ACF1C0EB90A0D316095748 /* RenamedFileRowView.swift */; };
-		87111CFE8872C7BC1529359C /* mp3TagEditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8435E439FF11C3111BFF0C /* mp3TagEditorUITests.swift */; };
-		9B6883E7055E681B730B6CAD /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0C9678DA515420CA2B388A /* FileManager.swift */; };
-		A5BE907AB22ECCA24663391E /* Mp3TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B730CDB2899BABA2B03961C /* Mp3TagView.swift */; };
-		ABE23BA265C8D04C1EDE03E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2261C5ABEBABDF4CED3DE55A /* Preview Assets.xcassets */; };
-		AF7ECF1CBDFCFF443B9A1FD8 /* 03. anemos.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1C531F6F886C3301706C051A /* 03. anemos.mp3 */; };
-		BE742C10310C8CE195D36C74 /* ConvertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15090E629A93912AB64FDE /* ConvertView.swift */; };
-		BFCFDA06953CCFBEB13649D5 /* 08. 巣立ちの歌 -TV Size-.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065DA5A210AA7E624F5A3A10 /* 08. 巣立ちの歌 -TV Size-.mp3 */; };
-		C0AA8E3BE64A7CFF9848AEAB /* 07. 巣立ちの歌 -沢木桃恵 ソロver.-.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1C45FC67843B6B0A8797CC59 /* 07. 巣立ちの歌 -沢木桃恵 ソロver.-.mp3 */; };
-		C1E73B3DEA9AA5DF2BEC618D /* 01. 巣立ちの歌.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF82158EFBE07B4E3565E66A /* 01. 巣立ちの歌.mp3 */; };
-		C9A19316E0F5AA7047CEBECC /* Mp3File+FileFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE5BF9424E3061DAED7EA91 /* Mp3File+FileFormat.swift */; };
-		D7A0DBAF30338B73A8FB1408 /* StringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF400D89E785D92E1BA2812 /* StringBuilder.swift */; };
-		D966150A814D9114070CA33B /* ModifiableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FF0B61C23E2ABC9ADFA377 /* ModifiableTextField.swift */; };
-		E22C4E662CF69DFA8679873F /* mp3TagEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F67E9B06F6807B9DB334C0C /* mp3TagEditorTests.swift */; };
-		E55F0D0E4BF8007DF3D56C42 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7E9B0A190A24737754AC8 /* String.swift */; };
-		E679B3E51E1EF096D3368595 /* Mp3FileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88E7E64C05869EAED57ED97 /* Mp3FileTableView.swift */; };
-		EB765D6A0DD35B8F1C9F5FEC /* 06. 巣立ちの歌 -川井リカ ソロver.-.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E2EC8024E716D423DDE4B091 /* 06. 巣立ちの歌 -川井リカ ソロver.-.mp3 */; };
-		EBD46101D01D7E3367E1803D /* 05. 巣立ちの歌 -青沼ねいる ソロver.-.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 016C72C0AC9B93A97DBA9F2E /* 05. 巣立ちの歌 -青沼ねいる ソロver.-.mp3 */; };
-		EF2D0C751B8DF07EFBEC621F /* Mp3TagEditorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B493ACD6656E6A6BBE2B05F /* Mp3TagEditorApp.swift */; };
-		FDDCBC83F423B6A466B6D504 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F31389AA49B2701D7C67FC61 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,52 +29,62 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		016C72C0AC9B93A97DBA9F2E /* 05. 巣立ちの歌 -青沼ねいる ソロver.-.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "05. 巣立ちの歌 -青沼ねいる ソロver.-.mp3"; sourceTree = "<group>"; };
-		01E7E9B0A190A24737754AC8 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		065DA5A210AA7E624F5A3A10 /* 08. 巣立ちの歌 -TV Size-.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "08. 巣立ちの歌 -TV Size-.mp3"; sourceTree = "<group>"; };
-		0B0736C67AB98EA0B368FCA3 /* FileFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFormat.swift; sourceTree = "<group>"; };
-		0FF400D89E785D92E1BA2812 /* StringBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringBuilder.swift; sourceTree = "<group>"; };
-		146808E3BE735F7550A4D386 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		14FF0B61C23E2ABC9ADFA377 /* ModifiableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiableTextField.swift; sourceTree = "<group>"; };
-		1733F5FC8AAB775E614FB675 /* 04. 巣立ちの歌 -大戸アイ ソロver.-.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "04. 巣立ちの歌 -大戸アイ ソロver.-.mp3"; sourceTree = "<group>"; };
-		1BC40DCBAB97233D082DE6A5 /* 09. Life is サイダー -TV Size-.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "09. Life is サイダー -TV Size-.mp3"; sourceTree = "<group>"; };
-		1C45FC67843B6B0A8797CC59 /* 07. 巣立ちの歌 -沢木桃恵 ソロver.-.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "07. 巣立ちの歌 -沢木桃恵 ソロver.-.mp3"; sourceTree = "<group>"; };
-		1C531F6F886C3301706C051A /* 03. anemos.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "03. anemos.mp3"; sourceTree = "<group>"; };
-		2261C5ABEBABDF4CED3DE55A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		256AC1FF89CF12D00CEDB1F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		29C02D60232B70C2FAB0CD76 /* mp3TagEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mp3TagEditor.entitlements; sourceTree = "<group>"; };
-		31A3ADD3784FA875683F0AC6 /* Mp3File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mp3File.swift; sourceTree = "<group>"; };
-		4B730CDB2899BABA2B03961C /* Mp3TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mp3TagView.swift; sourceTree = "<group>"; };
-		4E15090E629A93912AB64FDE /* ConvertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertView.swift; sourceTree = "<group>"; };
-		4F67E9B06F6807B9DB334C0C /* mp3TagEditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mp3TagEditorTests.swift; sourceTree = "<group>"; };
-		5EC61D880648D59A5E41B8AF /* Cover_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Cover_02.jpg; sourceTree = "<group>"; };
-		602EBFBFA2F49F3D62A1C3B7 /* .gitignore */ = {isa = PBXFileReference; path = .gitignore; sourceTree = "<group>"; };
-		63D3A7571FCC9FE69BD3EDC9 /* Cover_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Cover_01.jpg; sourceTree = "<group>"; };
-		64C3D97229E4AF984D2BE3CD /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
-		66A698E4DA9DF6170F82A7FA /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		689C557F574425C3940648D6 /* HelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpButton.swift; sourceTree = "<group>"; };
 		6E2C4C395486BCE55300AE87 /* mp3TagEditorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mp3TagEditorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7360AC0353305018B0904390 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		7B8435E439FF11C3111BFF0C /* mp3TagEditorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mp3TagEditorUITests.swift; sourceTree = "<group>"; };
-		7D0C9678DA515420CA2B388A /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
-		9B493ACD6656E6A6BBE2B05F /* Mp3TagEditorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mp3TagEditorApp.swift; sourceTree = "<group>"; };
-		A7CCCE541CEDA2BC63812279 /* Applicable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applicable.swift; sourceTree = "<group>"; };
-		B0798552BD613535BEFAABE0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B85B9E98918929D50B60B2DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		BA1C16EC638E6C4DC4A14C30 /* 02. Life is サイダー.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "02. Life is サイダー.mp3"; sourceTree = "<group>"; };
-		C88E7E64C05869EAED57ED97 /* Mp3FileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mp3FileTableView.swift; sourceTree = "<group>"; };
 		D2645EB12CED49BDFFE15FEA /* mp3TagEditorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mp3TagEditorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB032C4549377927CB03CE6D /* FileListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListStore.swift; sourceTree = "<group>"; };
-		DDE5BF9424E3061DAED7EA91 /* Mp3File+FileFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mp3File+FileFormat.swift"; sourceTree = "<group>"; };
-		DFF4BA1358EE970AAC1BC5DE /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		E2EC8024E716D423DDE4B091 /* 06. 巣立ちの歌 -川井リカ ソロver.-.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "06. 巣立ちの歌 -川井リカ ソロver.-.mp3"; sourceTree = "<group>"; };
-		E4ACF1C0EB90A0D316095748 /* RenamedFileRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenamedFileRowView.swift; sourceTree = "<group>"; };
-		E8ADFB5A61217E8B38524796 /* SampleMp3Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleMp3Files.swift; sourceTree = "<group>"; };
-		EF82158EFBE07B4E3565E66A /* 01. 巣立ちの歌.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "01. 巣立ちの歌.mp3"; sourceTree = "<group>"; };
-		F31389AA49B2701D7C67FC61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F3FA9A5FB4BDF80C6F7EA9AE /* FormatHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatHelpView.swift; sourceTree = "<group>"; };
 		F42144068AC2280FE5841803 /* mp3TagEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mp3TagEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B95FB47A30628F9C003DEDB0 /* Exceptions for "mp3TagEditor" folder in "mp3TagEditor" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Info.plist,
+				"Resources/Preview Content/Sample mp3 files/.gitignore",
+			);
+			target = 0DA2913215D63207C82AC20A /* mp3TagEditor */;
+		};
+		B95FB47B30628F9C003DEDB0 /* Exceptions for "mp3TagEditorTests" folder in "mp3TagEditorTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				mp3TagEditorTests.swift,
+			);
+			target = D44F987DF6CF858498C83863 /* mp3TagEditorTests */;
+		};
+		B95FB48030628FA0003DEDB0 /* Exceptions for "mp3TagEditorUITests" folder in "mp3TagEditorUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				mp3TagEditorUITests.swift,
+			);
+			target = B59CBD19191C5246A778B3B5 /* mp3TagEditorUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		B95FB45030628F9A003DEDB0 /* mp3TagEditor */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B95FB47A30628F9C003DEDB0 /* Exceptions for "mp3TagEditor" folder in "mp3TagEditor" target */,
+			);
+			path = mp3TagEditor;
+			sourceTree = "<group>";
+		};
+		B95FB47830628F9C003DEDB0 /* mp3TagEditorTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B95FB47B30628F9C003DEDB0 /* Exceptions for "mp3TagEditorTests" folder in "mp3TagEditorTests" target */,
+			);
+			path = mp3TagEditorTests;
+			sourceTree = "<group>";
+		};
+		B95FB47E30628F9F003DEDB0 /* mp3TagEditorUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B95FB48030628FA0003DEDB0 /* Exceptions for "mp3TagEditorUITests" folder in "mp3TagEditorUITests" target */,
+			);
+			path = mp3TagEditorUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		451C5D550426872040306DC9 /* Frameworks */ = {
@@ -126,141 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0ECC262135201CE3C4A8F6FB /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				689C557F574425C3940648D6 /* HelpButton.swift */,
-				14FF0B61C23E2ABC9ADFA377 /* ModifiableTextField.swift */,
-				C88E7E64C05869EAED57ED97 /* Mp3FileTableView.swift */,
-				4B730CDB2899BABA2B03961C /* Mp3TagView.swift */,
-				E4ACF1C0EB90A0D316095748 /* RenamedFileRowView.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		1C130626E19A32D5EA86603A /* mp3TagEditorUITests */ = {
-			isa = PBXGroup;
-			children = (
-				B85B9E98918929D50B60B2DA /* Info.plist */,
-				7B8435E439FF11C3111BFF0C /* mp3TagEditorUITests.swift */,
-			);
-			path = mp3TagEditorUITests;
-			sourceTree = "<group>";
-		};
 		2C1F4F7AFA819BA1418BE153 = {
 			isa = PBXGroup;
 			children = (
-				3CF536BBD4C4254F41C87A50 /* mp3TagEditor */,
-				8BA6E376C6A37CC1062EE96F /* mp3TagEditorTests */,
-				1C130626E19A32D5EA86603A /* mp3TagEditorUITests */,
+				B95FB45030628F9A003DEDB0 /* mp3TagEditor */,
+				B95FB47830628F9C003DEDB0 /* mp3TagEditorTests */,
+				B95FB47E30628F9F003DEDB0 /* mp3TagEditorUITests */,
 				F8C63B869211CBBB1A2F6D19 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		3CF536BBD4C4254F41C87A50 /* mp3TagEditor */ = {
-			isa = PBXGroup;
-			children = (
-				146808E3BE735F7550A4D386 /* AppDelegate.swift */,
-				B0798552BD613535BEFAABE0 /* ContentView.swift */,
-				4E15090E629A93912AB64FDE /* ConvertView.swift */,
-				DB032C4549377927CB03CE6D /* FileListStore.swift */,
-				F3FA9A5FB4BDF80C6F7EA9AE /* FormatHelpView.swift */,
-				9B493ACD6656E6A6BBE2B05F /* Mp3TagEditorApp.swift */,
-				0ECC262135201CE3C4A8F6FB /* Components */,
-				3F22EF51258AEE4FC5B30D2E /* Model */,
-				C310580409CB34FF0ABCB0AA /* Resources */,
-				D1E525E816C72BDF87C68823 /* Util */,
-			);
-			path = mp3TagEditor;
-			sourceTree = "<group>";
-		};
-		3F22EF51258AEE4FC5B30D2E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0B0736C67AB98EA0B368FCA3 /* FileFormat.swift */,
-				31A3ADD3784FA875683F0AC6 /* Mp3File.swift */,
-				DDE5BF9424E3061DAED7EA91 /* Mp3File+FileFormat.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		5C87159345924DD45379390A /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				DFF4BA1358EE970AAC1BC5DE /* Array.swift */,
-				7D0C9678DA515420CA2B388A /* FileManager.swift */,
-				64C3D97229E4AF984D2BE3CD /* Sequence.swift */,
-				01E7E9B0A190A24737754AC8 /* String.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		7E2493925D592863CADA3DE6 /* Sample mp3 files */ = {
-			isa = PBXGroup;
-			children = (
-				602EBFBFA2F49F3D62A1C3B7 /* .gitignore */,
-				EF82158EFBE07B4E3565E66A /* 01. 巣立ちの歌.mp3 */,
-				BA1C16EC638E6C4DC4A14C30 /* 02. Life is サイダー.mp3 */,
-				1C531F6F886C3301706C051A /* 03. anemos.mp3 */,
-				1733F5FC8AAB775E614FB675 /* 04. 巣立ちの歌 -大戸アイ ソロver.-.mp3 */,
-				016C72C0AC9B93A97DBA9F2E /* 05. 巣立ちの歌 -青沼ねいる ソロver.-.mp3 */,
-				E2EC8024E716D423DDE4B091 /* 06. 巣立ちの歌 -川井リカ ソロver.-.mp3 */,
-				1C45FC67843B6B0A8797CC59 /* 07. 巣立ちの歌 -沢木桃恵 ソロver.-.mp3 */,
-				065DA5A210AA7E624F5A3A10 /* 08. 巣立ちの歌 -TV Size-.mp3 */,
-				1BC40DCBAB97233D082DE6A5 /* 09. Life is サイダー -TV Size-.mp3 */,
-				63D3A7571FCC9FE69BD3EDC9 /* Cover_01.jpg */,
-				5EC61D880648D59A5E41B8AF /* Cover_02.jpg */,
-			);
-			path = "Sample mp3 files";
-			sourceTree = "<group>";
-		};
-		8BA6E376C6A37CC1062EE96F /* mp3TagEditorTests */ = {
-			isa = PBXGroup;
-			children = (
-				7360AC0353305018B0904390 /* Info.plist */,
-				4F67E9B06F6807B9DB334C0C /* mp3TagEditorTests.swift */,
-			);
-			path = mp3TagEditorTests;
-			sourceTree = "<group>";
-		};
-		B32772CDF18769648C178B9C /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				2261C5ABEBABDF4CED3DE55A /* Preview Assets.xcassets */,
-				E8ADFB5A61217E8B38524796 /* SampleMp3Files.swift */,
-				7E2493925D592863CADA3DE6 /* Sample mp3 files */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		C310580409CB34FF0ABCB0AA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				F31389AA49B2701D7C67FC61 /* Assets.xcassets */,
-				256AC1FF89CF12D00CEDB1F8 /* Info.plist */,
-				29C02D60232B70C2FAB0CD76 /* mp3TagEditor.entitlements */,
-				B32772CDF18769648C178B9C /* Preview Content */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		CAF3D9EC626A494A725E6AC1 /* FunctionBuilder */ = {
-			isa = PBXGroup;
-			children = (
-				0FF400D89E785D92E1BA2812 /* StringBuilder.swift */,
-			);
-			path = FunctionBuilder;
-			sourceTree = "<group>";
-		};
-		D1E525E816C72BDF87C68823 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				A7CCCE541CEDA2BC63812279 /* Applicable.swift */,
-				66A698E4DA9DF6170F82A7FA /* Logger.swift */,
-				5C87159345924DD45379390A /* Extensions */,
-				CAF3D9EC626A494A725E6AC1 /* FunctionBuilder */,
-			);
-			path = Util;
 			sourceTree = "<group>";
 		};
 		F8C63B869211CBBB1A2F6D19 /* Products */ = {
@@ -287,6 +133,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B95FB45030628F9A003DEDB0 /* mp3TagEditor */,
 			);
 			name = mp3TagEditor;
 			packageProductDependencies = (
@@ -384,19 +233,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1E73B3DEA9AA5DF2BEC618D /* 01. 巣立ちの歌.mp3 in Resources */,
-				42F8AB618B893F5313F235C1 /* 02. Life is サイダー.mp3 in Resources */,
-				AF7ECF1CBDFCFF443B9A1FD8 /* 03. anemos.mp3 in Resources */,
-				5E7BEBE4C44B393639BA7FD2 /* 04. 巣立ちの歌 -大戸アイ ソロver.-.mp3 in Resources */,
-				EBD46101D01D7E3367E1803D /* 05. 巣立ちの歌 -青沼ねいる ソロver.-.mp3 in Resources */,
-				EB765D6A0DD35B8F1C9F5FEC /* 06. 巣立ちの歌 -川井リカ ソロver.-.mp3 in Resources */,
-				C0AA8E3BE64A7CFF9848AEAB /* 07. 巣立ちの歌 -沢木桃恵 ソロver.-.mp3 in Resources */,
-				BFCFDA06953CCFBEB13649D5 /* 08. 巣立ちの歌 -TV Size-.mp3 in Resources */,
-				6ECCC311CA030E1E2F188FED /* 09. Life is サイダー -TV Size-.mp3 in Resources */,
-				FDDCBC83F423B6A466B6D504 /* Assets.xcassets in Resources */,
-				0FD2598A97478AF405BE502C /* Cover_01.jpg in Resources */,
-				2F0A4FFD51069BE511E20537 /* Cover_02.jpg in Resources */,
-				ABE23BA265C8D04C1EDE03E1 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,7 +243,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87111CFE8872C7BC1529359C /* mp3TagEditorUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,28 +250,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7945E672C2B4AAED8092F8C7 /* AppDelegate.swift in Sources */,
-				5D8F2B5E616439AAE3CFCC0C /* Applicable.swift in Sources */,
-				4A255B749E6959FA5306C13A /* Array.swift in Sources */,
-				581F6818A2663A09BCAC6417 /* ContentView.swift in Sources */,
-				BE742C10310C8CE195D36C74 /* ConvertView.swift in Sources */,
-				70D36772CEE93B88F6E1F473 /* FileFormat.swift in Sources */,
-				23BF57D79E541FC450D654CD /* FileListStore.swift in Sources */,
-				9B6883E7055E681B730B6CAD /* FileManager.swift in Sources */,
-				52BFA9E570057CE4C6C4815F /* FormatHelpView.swift in Sources */,
-				74EAAB954010C3582D7C6BC0 /* HelpButton.swift in Sources */,
-				0EB63F79B30133F44BD5039B /* Logger.swift in Sources */,
-				D966150A814D9114070CA33B /* ModifiableTextField.swift in Sources */,
-				C9A19316E0F5AA7047CEBECC /* Mp3File+FileFormat.swift in Sources */,
-				09C2754A67577CE389471C81 /* Mp3File.swift in Sources */,
-				E679B3E51E1EF096D3368595 /* Mp3FileTableView.swift in Sources */,
-				EF2D0C751B8DF07EFBEC621F /* Mp3TagEditorApp.swift in Sources */,
-				A5BE907AB22ECCA24663391E /* Mp3TagView.swift in Sources */,
-				82AE01A419AECDF9644C679D /* RenamedFileRowView.swift in Sources */,
-				4552AB9A820303EB23B486B7 /* SampleMp3Files.swift in Sources */,
-				409A709DF05D2BBCAABEDF38 /* Sequence.swift in Sources */,
-				E55F0D0E4BF8007DF3D56C42 /* String.swift in Sources */,
-				D7A0DBAF30338B73A8FB1408 /* StringBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,7 +257,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E22C4E662CF69DFA8679873F /* mp3TagEditorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,7 +482,11 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) $(OTHER_LDFLAGS) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.room417.mp3TagEditor;
 				SDKROOT = macosx;
 			};
@@ -689,7 +505,11 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) $(OTHER_LDFLAGS) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.room417.mp3TagEditor;
 				SDKROOT = macosx;
 			};
