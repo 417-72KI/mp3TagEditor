@@ -43,20 +43,6 @@
 			);
 			target = 0DA2913215D63207C82AC20A /* mp3TagEditor */;
 		};
-		B95FB47B30628F9C003DEDB0 /* Exceptions for "mp3TagEditorTests" folder in "mp3TagEditorTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				mp3TagEditorTests.swift,
-			);
-			target = D44F987DF6CF858498C83863 /* mp3TagEditorTests */;
-		};
-		B95FB48030628FA0003DEDB0 /* Exceptions for "mp3TagEditorUITests" folder in "mp3TagEditorUITests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				mp3TagEditorUITests.swift,
-			);
-			target = B59CBD19191C5246A778B3B5 /* mp3TagEditorUITests */;
-		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -70,17 +56,11 @@
 		};
 		B95FB47830628F9C003DEDB0 /* mp3TagEditorTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				B95FB47B30628F9C003DEDB0 /* Exceptions for "mp3TagEditorTests" folder in "mp3TagEditorTests" target */,
-			);
 			path = mp3TagEditorTests;
 			sourceTree = "<group>";
 		};
 		B95FB47E30628F9F003DEDB0 /* mp3TagEditorUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				B95FB48030628FA0003DEDB0 /* Exceptions for "mp3TagEditorUITests" folder in "mp3TagEditorUITests" target */,
-			);
 			path = mp3TagEditorUITests;
 			sourceTree = "<group>";
 		};
@@ -157,6 +137,9 @@
 			dependencies = (
 				226B54CF63D14ED7EDAD2E26 /* PBXTargetDependency */,
 			);
+			fileSystemSynchronizedGroups = (
+				B95FB47E30628F9F003DEDB0 /* mp3TagEditorUITests */,
+			);
 			name = mp3TagEditorUITests;
 			packageProductDependencies = (
 			);
@@ -174,6 +157,9 @@
 			);
 			dependencies = (
 				A95EDCF20C37FEC77AA05FDE /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B95FB47830628F9C003DEDB0 /* mp3TagEditorTests */,
 			);
 			name = mp3TagEditorTests;
 			packageProductDependencies = (
