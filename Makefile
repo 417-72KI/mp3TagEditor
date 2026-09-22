@@ -8,40 +8,32 @@ run: build
 
 setup:
 	mint bootstrap
-	$(MAKE) xcproj
 
-xcproj:
-	mint run xcodegen xcodegen generate --use-cache --quiet
-
-build: xcproj
+build:
 	xcrun xcodebuild \
 		-resolvePackageDependencies \
 		-project 'mp3TagEditor.xcodeproj' \
 		-scheme 'mp3TagEditor' \
-		-clonedSourcePackagesDirPath .build
 	xcrun xcodebuild \
 		-project 'mp3TagEditor.xcodeproj' \
 		-scheme 'mp3TagEditor' \
 		-configuration Debug \
 		-destination 'platform=macOS' \
-		-clonedSourcePackagesDirPath .build \
 		-derivedDataPath ${DERIVED_DATA_PATH} \
 		| xcbeautify
 
-clean: xcproj
+clean:
 	xcrun xcodebuild \
-	-project 'mp3TagEditor.xcodeproj' \
-	-scheme 'mp3TagEditor' \
-	-configuration Debug \
-	-clonedSourcePackagesDirPath .build \
-	clean | xcbeautify
+		-project 'mp3TagEditor.xcodeproj' \
+		-scheme 'mp3TagEditor' \
+		-configuration Debug \
+		-clonedSourcePackagesDirPath .build \
+		clean | xcbeautify
 
-test: xcproj
+test:
 	xcrun xcodebuild \
 		-project 'mp3TagEditor.xcodeproj' \
 		-scheme 'mp3TagEditor' \
 		-configuration Debug \
 		-destination 'platform=macOS' \
-		-clonedSourcePackagesDirPath .build \
-		-derivedDataPath ${DERIVED_DATA_PATH} \
 		test | xcbeautify
