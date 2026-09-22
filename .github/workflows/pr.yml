@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Cache SPM build directory
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         env:
           cache-name: swiftpm
         with:
@@ -24,7 +24,7 @@ jobs:
             ${{ runner.os }}-${{ github.job }}-
             ${{ runner.os }}-
       - name: Cache XcodeGen
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         env:
           cache-name: xcodegen
         with:
