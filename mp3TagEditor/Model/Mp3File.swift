@@ -17,6 +17,7 @@ public class Mp3File: Identifiable, ObservableObject {
     private(set) var source: Source
     private(set) var id3Tag: ID3Tag?
     private(set) var isModified: Bool
+    let addedDate = Date()
 
     init(path: String) throws {
         self.source = .path(path)

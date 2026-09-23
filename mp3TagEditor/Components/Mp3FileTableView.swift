@@ -12,33 +12,45 @@ struct Mp3FileTableView: View {
     @Binding var contents: [Mp3File]
     @Binding var selectedIndicies: [Int]
     @Binding var sortingKey: (keyPath: PartialKeyPath<Mp3File>, ascending: Bool)?
+    @State private var sortOrder = [KeyPathComparator(\Mp3File.addedDate)]
 
     var body: some View {
         Table(
-            $contents,
+            contents.sorted(using: sortOrder),
             selection: Binding {
                 Set(selectedIndicies.map { contents[$0].id })
             } set: { ids in
                 selectedIndicies = ids.compactMap { id in contents.firstIndex { $0.id == id } }
-            }
+            },
+            sortOrder: $sortOrder,
         ) {
             TableColumn("Title") {
-                EditableCell(text: $0.title)
+                if let index = contents.firstIndex(of: $0) {
+                    EditableCell(text: $contents[index].title)
+                }
             }
             TableColumn("Artist") {
-                EditableCell(text: $0.artist)
+                if let index = contents.firstIndex(of: $0) {
+                    EditableCell(text: $contents[index].artist)
+                }
             }
             TableColumn("Album") {
-                EditableCell(text: $0.album)
+                if let index = contents.firstIndex(of: $0) {
+                    EditableCell(text: $contents[index].album)
+                }
             }
             TableColumn("Album Artist") {
-                EditableCell(text: $0.albumArtist)
+                if let index = contents.firstIndex(of: $0) {
+                    EditableCell(text: $contents[index].albumArtist)
+                }
             }
             TableColumn("Track") {
-                EditableCell(text: $0.trackPositionString)
+                if let index = contents.firstIndex(of: $0) {
+                    EditableCell(text: $contents[index].trackPositionString)
+                }
             }
             TableColumn("File Path") {
-                Text($0.wrappedValue.filePath ?? "")
+                Text($0.filePath ?? "")
             }
         }
     }
@@ -59,6 +71,7 @@ private extension Mp3FileTableView {
         var body: some View {
             if isEditing {
                 TextField("", text: $temporaryText) { text = temporaryText }
+                    .textFieldStyle(.plain)
                     .focused($isFocused, equals: true)
                     .onExitCommand {
                         temporaryText = text
