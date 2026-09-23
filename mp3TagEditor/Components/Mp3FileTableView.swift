@@ -8,6 +8,73 @@
 import Cocoa
 import SwiftUI
 
+struct Mp3FileTableView: View {
+    @Binding var contents: [Mp3File]
+    @Binding var selectedIndicies: [Int]
+    @Binding var sortingKey: (keyPath: PartialKeyPath<Mp3File>, ascending: Bool)?
+
+    var body: some View {
+        Table(
+            $contents,
+            selection: Binding {
+                Set(selectedIndicies.map { contents[$0].id })
+            } set: { ids in
+                selectedIndicies = ids.compactMap { id in contents.firstIndex { $0.id == id } }
+            }
+        ) {
+            TableColumn("Title") {
+                EditableCell(text: $0.title)
+            }
+            TableColumn("Artist") {
+                EditableCell(text: $0.artist)
+            }
+            TableColumn("Album") {
+                EditableCell(text: $0.album)
+            }
+            TableColumn("Album Artist") {
+                EditableCell(text: $0.albumArtist)
+            }
+            TableColumn("Track") {
+                EditableCell(text: $0.trackPositionString)
+            }
+            TableColumn("File Path") {
+                Text($0.wrappedValue.filePath ?? "")
+            }
+        }
+    }
+}
+
+private extension Mp3FileTableView {
+    struct EditableCell: View {
+        @State private var isEditing: Bool = false
+        @Binding var text: String
+        @State private var temporaryText: String
+        @FocusState private var isFocused: Bool
+
+        init(text: Binding<String>) {
+            self._text = text
+            self.temporaryText = text.wrappedValue
+        }
+
+        var body: some View {
+            if isEditing {
+                TextField("", text: $temporaryText) { text = temporaryText }
+                    .focused($isFocused, equals: true)
+                    .onExitCommand {
+                        temporaryText = text
+                        isEditing = false
+                    }
+            } else {
+                Text("\(text)")
+                    .onTapGesture(count: 2) {
+                        isEditing = true
+                    }
+            }
+        }
+    }
+}
+
+/*
 struct Mp3FileTableView: NSViewRepresentable {
     typealias NSViewType = NSScrollView
 
@@ -300,3 +367,4 @@ struct Mp3FileTableView_Previews: PreviewProvider {
         }
     }
 }
+*/

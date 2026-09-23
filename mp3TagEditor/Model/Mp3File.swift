@@ -70,35 +70,51 @@ extension Mp3File {
 
 // MARK: -
 extension Mp3File {
-    var title: String? {
-        get { (id3Tag?.frames[.title] as? ID3FrameWithStringContent)?.content }
+    var title: String {
+        get { (id3Tag?.frames[.title] as? ID3FrameWithStringContent)?.content ?? "" }
         set {
             guard newValue != title else { return }
-            id3Tag?.frames[.title] = newValue.flatMap(ID3FrameWithStringContent.init(content:))
+            id3Tag?.frames[.title] = if newValue.isEmpty {
+                nil
+            } else {
+                ID3FrameWithStringContent(content: newValue)
+            }
             isModified = true
         }
     }
-    var album: String? {
-        get { (id3Tag?.frames[.album] as? ID3FrameWithStringContent)?.content }
+    var album: String {
+        get { (id3Tag?.frames[.album] as? ID3FrameWithStringContent)?.content ?? "" }
         set {
             guard newValue != album else { return }
-            id3Tag?.frames[.album] = newValue.flatMap(ID3FrameWithStringContent.init(content:))
+            id3Tag?.frames[.album] = if newValue.isEmpty {
+                nil
+            } else {
+                ID3FrameWithStringContent(content: newValue)
+            }
             isModified = true
         }
     }
-    var albumArtist: String? {
-        get { (id3Tag?.frames[.albumArtist] as? ID3FrameWithStringContent)?.content }
+    var albumArtist: String {
+        get { (id3Tag?.frames[.albumArtist] as? ID3FrameWithStringContent)?.content ?? "" }
         set {
             guard newValue != albumArtist else { return }
-            id3Tag?.frames[.albumArtist] = newValue.flatMap(ID3FrameWithStringContent.init(content:))
+            id3Tag?.frames[.albumArtist] = if newValue.isEmpty {
+                nil
+            } else {
+                ID3FrameWithStringContent(content: newValue)
+            }
             isModified = true
         }
     }
-    var artist: String? {
-        get { (id3Tag?.frames[.artist] as? ID3FrameWithStringContent)?.content }
+    var artist: String {
+        get { (id3Tag?.frames[.artist] as? ID3FrameWithStringContent)?.content ?? "" }
         set {
             guard newValue != artist else { return }
-            id3Tag?.frames[.artist] = newValue.flatMap(ID3FrameWithStringContent.init(content:))
+            id3Tag?.frames[.artist] = if newValue.isEmpty {
+                nil
+            } else {
+                ID3FrameWithStringContent(content: newValue)
+            }
             isModified = true
         }
     }
@@ -269,9 +285,9 @@ extension Mp3File {
 }
 
 extension Mp3File {
-    var trackPositionString: String? {
+    var trackPositionString: String {
         get {
-            guard let trackPosition = trackPosition else { return nil }
+            guard let trackPosition else { return "" }
             return String {
                 String(trackPosition.part)
                 if let total = trackPosition.total {
@@ -281,7 +297,7 @@ extension Mp3File {
         }
         set {
             let regex = try! NSRegularExpression(pattern: #"^(?<part>[0-9]+)(/(?<total>[0-9]+))?$"#)
-            guard let newValue = newValue else {
+            if newValue.isEmpty {
                 trackPosition = nil
                 return
             }

@@ -111,14 +111,18 @@ private extension Mp3TagView {
         private let isEmpty: Bool
 
         init(mp3Files: [Mp3File]) {
+            func singleOrMultipleValues<T: Equatable>(keyPath: KeyPath<Mp3File, T>) -> String {
+                switch mp3Files.singleOrMultipleValues(keyPath: keyPath) {
+                case let .singleValue(value): "\(value)"
+                case .multipleValues: "(Multiple Values)"
+                case .none: ""
+                }
+            }
             func singleOrMultipleValues<T: Equatable>(keyPath: KeyPath<Mp3File, T?>) -> String {
                 switch mp3Files.singleOrMultipleValues(keyPath: keyPath) {
-                case let .singleValue(value):
-                    return value.flatMap { "\($0)" } ?? ""
-                case .multipleValues:
-                    return "(Multiple Values)"
-                case .none:
-                    return ""
+                case let .singleValue(value): value.flatMap { "\($0)" } ?? ""
+                case .multipleValues: "(Multiple Values)"
+                case .none: ""
                 }
             }
             initialValue = .init(
